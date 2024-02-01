@@ -1,17 +1,58 @@
 import type { Metadata } from "next";
+import { Viewport } from "next";
 import { IBM_Plex_Serif } from "next/font/google";
 import { IconSearch, IconSettingsDown } from "@tabler/icons-react";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  minimumScale: 1,
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://biblio.day"),
+  title: "Biblio",
+  description:
+    "A minimalist, simple Bible viewing website.",
+  keywords: [
+    "Bible",
+    "Online Bible",
+    "Free Bible",
+    "Church",
+    "Christianity",
+    "Bible hub",
+    "Bible app",
+    "Biblio",
+    "dukc",
+    "duckyhq",
+    "God",
+    "Jesus Christ",
+  ],
+  authors: [{ name: "dukc", url: "https://dukc.dev" }],
+  creator: "dukc",
+  publisher: "dukc",
+  openGraph: {
+    title: "Biblio",
+    description:
+      "A minimalist, simple Bible viewing website.",
+    url: "https://biblio.day",
+    siteName: "dukc",
+    images: [
+      {
+        url: "/seoCover.png",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
-
-export const metadata: Metadata = {
-  title: "Biblio",
-  description: "A minimalist Bible website.",
-};
 
 export default function RootLayout({
   children,
