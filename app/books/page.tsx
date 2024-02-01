@@ -1,6 +1,6 @@
 
 import Dropdown from "@/components/ui/Dropdown";
-import GetBibles from "@/components/GetBibles";
+import GetBibleBooks from "@/components/GetBibleBooks";
 
 export default function Home() {
   return (
@@ -10,9 +10,9 @@ export default function Home() {
           <Dropdown disabled text="Chapter" />
           <Dropdown text="Bible Version" />
         </div>
-        <h2 className="text-2 font-bold">Bible Versions</h2>
+        <h2 className="text-2 font-bold">Bible Books</h2>
       </div>
-      <GetBibles />
+      <GetBibleBooks />
     </div>
   );
 }

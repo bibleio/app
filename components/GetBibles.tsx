@@ -1,20 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "./ui/Loading";
+
+interface GetBiblesProps {
+  setSelectedId: (id: string | null) => void;
+}
 
 interface Bible {
   name: string;
   id: string;
   abbreviation: string;
+  description: string;
   language: {
     name: string;
   };
 }
 
 const GetBibles: React.FC = () => {
-  console.log("GetBibles component is rendering");
   const [bibles, setBibles] = useState<Bible[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,9 +47,20 @@ const GetBibles: React.FC = () => {
       {uniqueBibles
         .filter((bible) => bible && bible.language.name === "English")
         .map((bible) => (
-          <button key={bible ? bible.id : ''} className="py-16 w-full text-left border-b border-black/20 group">
-            <h3 className="text-3 font-medium group-hover:translate-x-8 group-active:-translate-x-[.3] duration-200 ease-out group-hover:text-accent">{bible ? bible.name : ''}</h3>
-            <p className="text-body group-hover:translate-x-8 group-active:-translate-x-[.3] duration-200 ease-out group-hover:text-accent">Abbreviation: {bible ? bible.abbreviation.toUpperCase() : ''}</p>
+          <button
+            onClick={() => {
+              console.log(bible ? bible.id : "");
+              setSelectedId(bible ? bible.id : "");
+            }}
+            key={bible ? bible.id : ""}
+            className="py-16 w-full text-left border-b border-black/20 group"
+          >
+            <h3 className="text-3 font-medium group-hover:translate-x-8 group-active:-translate-x-[.3] duration-200 ease-out group-hover:text-accent">
+              {bible ? bible.name : ""} ({bible ? bible.abbreviation : ""})
+            </h3>
+            <p className="text-body group-hover:translate-x-8 group-active:-translate-x-[.3] duration-200 ease-out group-hover:text-accent">
+              {bible ? bible.description : ""}
+            </p>
           </button>
         ))}
     </div>

@@ -44,9 +44,23 @@ const config: Config = {
         "bg-white": "linear-gradient(180deg,#E3E3E3,#BBCBCE)",
       },
       colors: {
-        "fg-1": "rgba(0,0,0,0.05)",
-        "stroke-1": "rgba(0,0,0,0.15)",
-        "accent": "#0085FF"
+        "fg-1": "rgba(170,170,170,0.35)",
+        "stroke-1": "rgba(0,0,0,0.25)",
+        accent: "#0085FF",
+      },
+      keyframes: {
+        overlayShow: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        contentShow: {
+          from: { opacity: "0", transform: "translate(-50%, -48%)" },
+          to: { opacity: "1", transform: "translate(-50%, -50%)" },
+        },
+      },
+      animation: {
+        overlayShow: "overlayShow 200ms ease-out",
+        contentShow: "contentShow 200ms ease-out",
       },
     },
   },

@@ -3,6 +3,7 @@ import { Viewport } from "next";
 import { IBM_Plex_Serif } from "next/font/google";
 import { IconSearch, IconSettingsDown } from "@tabler/icons-react";
 import "./globals.css";
+import InfoModal from "@/components/ui/InfoModal";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -76,6 +77,7 @@ export default function RootLayout({
             <button>
               <IconSettingsDown className="hover:-translate-y-[1px] active:translate-y-4 hover:text-accent duration-200 ease-out" />
             </button>
+            <InfoModal />
           </div>
         </nav>
         {children}
