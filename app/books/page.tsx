@@ -1,6 +1,6 @@
 
 import Dropdown from "@/components/ui/Dropdown";
-import GetBibleBooks from "@/components/GetBibleBooks";
+import GetBibleBooks from "@/components/SelectBook";
 
 export default function Home() {
   return (

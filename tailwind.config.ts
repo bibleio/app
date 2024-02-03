@@ -44,7 +44,7 @@ const config: Config = {
         "bg-white": "linear-gradient(180deg,#E3E3E3,#BBCBCE)",
       },
       colors: {
-        "fg-1": "rgba(170,170,170,0.35)",
+        "fg-1": "rgba(180,180,180,0.35)",
         "stroke-1": "rgba(0,0,0,0.25)",
         accent: "#0085FF",
       },

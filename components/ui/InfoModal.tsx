@@ -2,8 +2,8 @@
 
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { IconArrowUpRight, IconInfoCircle, IconX } from "@tabler/icons-react";
-import Link from "next/link";
+import { IconInfoCircle, IconX } from "@tabler/icons-react";
+import LinkButton from "./LinkButton";
 
 const InfoModal = () => (
   <Dialog.Root>
@@ -31,26 +31,21 @@ const InfoModal = () => (
           </Dialog.Close>
         </div>
 
-        <Dialog.Description className="flex flex-col gap-8">
+        <Dialog.Description className="flex flex-col gap-12">
           <p className="text-body">
-            Biblio is a minimalist, simple Bible viewing app.
+            Biblio is a minimalist, open-source, simple Bible viewing app.{" "}
+            <br />
+            Biblio currently only supports English.
           </p>
-          <Link
-            href={"https://dukc.dev"}
-            target="_blank"
-            className="flex gap-4 items-center group hover:text-accent duration-200 ease-out"
-          >
-            Built by dukc{" "}
-            <IconArrowUpRight className="group-hover:rotate-45 duration-200 ease-out" />
-          </Link>
-          <Link
-            href={"https://scripture.api.bible/"}
-            target="_blank"
-            className="flex gap-4 items-center group hover:text-accent duration-200 ease-out"
-          >
-            Uses scripture.api.bible{" "}
-            <IconArrowUpRight className="group-hover:rotate-45 duration-200 ease-out" />
-          </Link>
+          <div className="flex flex-wrap gap-8">
+            <LinkButton text="Made by dukc" link="https://dukc.dev" />
+            <LinkButton
+              text="Uses scripture.api.bible"
+              link="https://scripture.api.bible/"
+            />
+            <LinkButton text="GitHub" link="https://github.com/dukcc/biblio" />
+          </div>
+          <p className="text-sub">Version 1.0 - Licensed under GPL-3</p>
         </Dialog.Description>
       </Dialog.Content>
     </Dialog.Portal>

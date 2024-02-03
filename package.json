@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-select": "^2.0.0",
     "@tabler/icons-react": "^2.46.0",
     "dotenv": "^16.4.1",
     "next": "14.1.0",
