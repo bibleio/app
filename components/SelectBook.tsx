@@ -15,14 +15,23 @@ interface Bible {
   };
 }
 
-const SelectBible: React.FC = () => {
+const SelectBook: React.FC = () => {
   const [bibles, setBibles] = useState<Bible[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
-  const [selectedBible] = useState<string | null>(() => {
-    return localStorage.getItem('selectedBible') || null;
-   });
-   console.log(selectedBible)
+  const [selectedBible, setSelectedBible] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      const selectedBible = localStorage.getItem("selectedBible");
+      setSelectedBible(selectedBible ? selectedBible : null);
+      if (selectedBible !== null) {
+        console.log(selectedBible)
+      } else {
+        console.log("isnt working")
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const endpoint = `/bibles/${selectedBible}/books`;
@@ -41,9 +50,7 @@ const SelectBible: React.FC = () => {
   }, []);
 
   if (loading) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   return (
@@ -53,9 +60,7 @@ const SelectBible: React.FC = () => {
       }}
     >
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
-        <h3 className="text-3 font-medium">
-          Book
-        </h3>
+        <h3 className="text-3 font-medium">Book</h3>
         <IconChevronDown />
       </Select.Trigger>
       <Select.Portal>
@@ -67,9 +72,7 @@ const SelectBible: React.FC = () => {
             <IconChevronUp />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-6">
-            <Select.Group>
-              a
-            </Select.Group>
+            <Select.Group>{selectedBible}</Select.Group>
           </Select.Viewport>
           <Select.ScrollDownButton className="flex items-center justify-center h-[25px]">
             <IconChevronDown />
@@ -103,4 +106,4 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   }
 );
 
-export default SelectBible;
+export default SelectBook;

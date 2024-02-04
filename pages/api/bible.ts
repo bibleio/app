@@ -7,6 +7,8 @@ export default async function handler(
   const endpoint = req.query.endpoint as string;
   const apiUrl = "https://api.scripture.api.bible/v1" + endpoint;
 
+  console.log("API Url: " + apiUrl)
+
   try {
     const response = await fetch(apiUrl, {
       headers: {

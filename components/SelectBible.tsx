@@ -17,15 +17,16 @@ interface Bible {
 
 const SelectBible: React.FC = () => {
   const [bibles, setBibles] = useState<Bible[]>([]);
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+  const [selectedValue, setSelectedValue] = useState<string | null>(() => {
+    const storedBible = localStorage.getItem("selectedBible");
+    return storedBible || '9879dbb7cfe39e4d-01:WEB';
+   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if selectedValue is not null before saving to localStorage
     if (selectedValue !== null) {
-      localStorage.setItem("selectedBible", selectedBibleId);
+      localStorage.setItem("selectedBible", selectedValue);
     } else {
-      // Optionally remove the item from localStorage if selectedValue is null
       localStorage.removeItem("selectedBible");
     }
   }, [selectedValue]);
@@ -84,7 +85,7 @@ const SelectBible: React.FC = () => {
     >
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
         <h3 className="text-3 font-medium">
-          {selectedAbbrev.toUpperCase() || "Bible Version"}
+          {selectedAbbrev?.toUpperCase() || "Bible Version"}
         </h3>
         <IconChevronDown />
       </Select.Trigger>
@@ -106,6 +107,7 @@ const SelectBible: React.FC = () => {
                     value={`${bible ? bible.id : ""}:${
                       bible ? bible.abbreviation : ""
                     }`}
+                    key={bible ? bible.id : ""}
                   >
                     <p className="text-body">
                       {bible ? bible.name : ""} (
