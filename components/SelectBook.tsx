@@ -18,23 +18,9 @@ interface Bible {
 const SelectBook: React.FC = () => {
   const [bibles, setBibles] = useState<Bible[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
-  const [selectedBible, setSelectedBible] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      const selectedBible = localStorage.getItem("selectedBible");
-      setSelectedBible(selectedBible ? selectedBible : null);
-      if (selectedBible !== null) {
-        console.log(selectedBible)
-      } else {
-        console.log("isnt working")
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    const endpoint = `/bibles/${selectedBible}/books`;
+    const endpoint = `/bibles/variableHere/books`;
     const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
     fetch(apiUrl)
@@ -54,11 +40,7 @@ const SelectBook: React.FC = () => {
   }
 
   return (
-    <Select.Root
-      onValueChange={(value) => {
-        setSelectedValue(value);
-      }}
-    >
+    <Select.Root>
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
         <h3 className="text-3 font-medium">Book</h3>
         <IconChevronDown />
@@ -72,7 +54,7 @@ const SelectBook: React.FC = () => {
             <IconChevronUp />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-6">
-            <Select.Group>{selectedBible}</Select.Group>
+            <Select.Group>a</Select.Group>
           </Select.Viewport>
           <Select.ScrollDownButton className="flex items-center justify-center h-[25px]">
             <IconChevronDown />

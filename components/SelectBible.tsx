@@ -14,22 +14,17 @@ interface Bible {
     name: string;
   };
 }
+interface SelectBibleProps {
+  onBibleSelection: (value: string) => void;
+}
 
-const SelectBible: React.FC = () => {
+const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   const [bibles, setBibles] = useState<Bible[]>([]);
-  const [selectedValue, setSelectedValue] = useState<string | null>(() => {
-    const storedBible = localStorage.getItem("selectedBible");
-    return storedBible || '9879dbb7cfe39e4d-01:WEB';
-   });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (selectedValue !== null) {
-      localStorage.setItem("selectedBible", selectedValue);
-    } else {
-      localStorage.removeItem("selectedBible");
-    }
-  }, [selectedValue]);
+  const handleSelectionChange = (value: string) => {
+    onBibleSelection(value);
+  };
 
   useEffect(() => {
     const endpoint = "/bibles";
@@ -72,20 +67,14 @@ const SelectBible: React.FC = () => {
   }
 
   const uniqueBibles = Array.from(
-    new Set(bibles.map((bible) => bible.name))
+    new Set((bibles || []).map((bible) => bible.name))
   ).map((name) => bibles.find((bible) => bible.name === name));
 
-  const [selectedBibleId, selectedAbbrev] = selectedValue?.split(":") || ['', ''];
-
   return (
-    <Select.Root
-      onValueChange={(value) => {
-        setSelectedValue(value);
-      }}
-    >
+    <Select.Root onValueChange={handleSelectionChange}>
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
         <h3 className="text-3 font-medium">
-          {selectedAbbrev?.toUpperCase() || "Bible Version"}
+          asd
         </h3>
         <IconChevronDown />
       </Select.Trigger>

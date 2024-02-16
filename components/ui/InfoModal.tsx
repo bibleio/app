@@ -33,7 +33,7 @@ const InfoModal = () => (
 
         <Dialog.Description className="flex flex-col gap-12">
           <p className="text-body">
-            Biblio is a minimalist, open-source, simple Bible viewing app.{" "}
+            Biblio is a minimalist, open-source, simple Bible viewing app.
             <br />
             Biblio currently only supports English.
           </p>
