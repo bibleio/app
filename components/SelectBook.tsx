@@ -5,38 +5,64 @@ import * as Select from "@radix-ui/react-select";
 import { IconCheck, IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import Loading from "./ui/Loading";
 
-interface Bible {
+interface SelectBookProps {
+  selectedBible: string | null;
+}
+interface Book {
   name: string;
   id: string;
-  abbreviation: string;
-  description: string;
-  language: {
-    name: string;
-  };
 }
 
-const SelectBook: React.FC = () => {
-  const [bibles, setBibles] = useState<Bible[]>([]);
+const SelectBook: React.FC<SelectBookProps> = ({ selectedBible }) => {
+  const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const endpoint = `/bibles/variableHere/books`;
-    const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
+  let bibleId = "null";
+  let bibleAbbrev = "null";
+  if (selectedBible) {
+    [bibleId, bibleAbbrev] = selectedBible.split(":");
+  }
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setBibles(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setLoading(false);
-      });
-  }, []);
+  useEffect(() => {
+    if (selectedBible) {
+      const endpoint = `/bibles/${bibleId}/books`;
+      const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
+
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          setBooks(data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          setLoading(false);
+        });
+    }
+  }, [bibleId]);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <Select.Root>
+        <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none">
+          <h3 className="text-3 font-medium">Book</h3>
+          <IconChevronDown />
+        </Select.Trigger>
+        <Select.Portal>
+          <Select.Content className="overflow-hidden bg-fg-1 rounded-[12px] backdrop-blur-lg border border-stroke-1">
+            <Select.ScrollUpButton className="flex items-center justify-center h-[25px]">
+              <IconChevronUp />
+            </Select.ScrollUpButton>
+            <Select.Viewport className="p-16">
+              <Loading />
+            </Select.Viewport>
+            <Select.ScrollDownButton className="flex items-center justify-center h-[25px]">
+              <IconChevronDown />
+            </Select.ScrollDownButton>
+          </Select.Content>
+        </Select.Portal>
+      </Select.Root>
+    );
   }
 
   return (
@@ -54,7 +80,23 @@ const SelectBook: React.FC = () => {
             <IconChevronUp />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-6">
-            <Select.Group>a</Select.Group>
+            <Select.Group>
+              {books && books.length > 0 ? (
+                books.map((book) => (
+                  <SelectItem
+                    className="flex flex-col gap-6 group"
+                    value={book.id}
+                    key={book.id}
+                  >
+                    <p className="text-body">{book.name}</p>
+                  </SelectItem>
+                ))
+              ) : (
+                <p className="text-body text-red-700">
+                  Error code 89 <br /> No books returned from API
+                </p>
+              )}
+            </Select.Group>
           </Select.Viewport>
           <Select.ScrollDownButton className="flex items-center justify-center h-[25px]">
             <IconChevronDown />

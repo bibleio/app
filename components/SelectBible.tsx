@@ -73,9 +73,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   return (
     <Select.Root onValueChange={handleSelectionChange}>
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
-        <h3 className="text-3 font-medium">
-          asd
-        </h3>
+        <h3 className="text-3 font-medium">Bible Version</h3>
         <IconChevronDown />
       </Select.Trigger>
       <Select.Portal>
