@@ -8,8 +8,14 @@ import SelectBook from "@/components/SelectBook";
 const Home: React.FC = () => {
   const [selectedBible, setSelectedBible] = useState<string | null>(null);
 
-  const handleIdSelection = (value: string) => {
+  const [selectedBook, setSelectedBook] = useState<string | null>(null);
+
+  const handleBibleIdSelection = (value: string) => {
     setSelectedBible(value);
+    console.log(value);
+  };
+  const handleBookIdSelection = (value: string) => {
+    setSelectedBook(value);
     console.log(value);
   };
   return (
@@ -17,13 +23,17 @@ const Home: React.FC = () => {
       <div className="flex flex-col gap-24 w-full">
         <div className="flex w-full justify-between">
           <div className="flex gap-24">
-            <SelectBook selectedBible={selectedBible} />
+            <SelectBook
+              onBookSelection={handleBookIdSelection}
+              selectedBible={selectedBible}
+            />
             <Dropdown disabled text="Chapter" />
           </div>
-          <SelectBible onBibleSelection={handleIdSelection} />
+          <SelectBible onBibleSelection={handleBibleIdSelection} />
         </div>
         <h2 className="text-2 font-bold">Bible</h2>
         <p className="text-body">Selected Bible: {selectedBible}</p>
+        <p className="text-body">Selected Bible book: {selectedBook}</p>
       </div>
     </div>
   );

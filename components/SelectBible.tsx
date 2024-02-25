@@ -21,9 +21,16 @@ interface SelectBibleProps {
 const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   const [bibles, setBibles] = useState<Bible[]>([]);
   const [loading, setLoading] = useState(true);
+  const [bibleAbbrev, setBibleAbbrev] = useState<string>("Bible Version");
 
   const handleSelectionChange = (value: string) => {
     onBibleSelection(value);
+    let bibleId = "null";
+    let bibleAbbrev = "null";
+    if (value) {
+      [bibleId, bibleAbbrev] = value.split(":");
+    }
+    setBibleAbbrev(bibleAbbrev.toUpperCase());
   };
 
   useEffect(() => {
@@ -73,7 +80,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   return (
     <Select.Root onValueChange={handleSelectionChange}>
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
-        <h3 className="text-3 font-medium">Bible Version</h3>
+        <h3 className="text-3 font-medium">{bibleAbbrev}</h3>
         <IconChevronDown />
       </Select.Trigger>
       <Select.Portal>

@@ -4,16 +4,19 @@ import React, { useEffect, useState } from "react";
 import * as Select from "@radix-ui/react-select";
 import { IconCheck, IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import Loading from "./ui/Loading";
-
-interface SelectBookProps {
-  selectedBible: string | null;
-}
 interface Book {
   name: string;
   id: string;
 }
+interface SelectBookProps {
+  selectedBible: string | null;
+  onBookSelection: (value: string) => void;
+}
 
-const SelectBook: React.FC<SelectBookProps> = ({ selectedBible }) => {
+const SelectBook: React.FC<SelectBookProps> = ({
+  selectedBible,
+  onBookSelection,
+}) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,6 +25,10 @@ const SelectBook: React.FC<SelectBookProps> = ({ selectedBible }) => {
   if (selectedBible) {
     [bibleId, bibleAbbrev] = selectedBible.split(":");
   }
+
+  const handleSelectionChange = (value: string) => {
+    onBookSelection(value);
+  };
 
   useEffect(() => {
     if (selectedBible) {
@@ -66,7 +73,7 @@ const SelectBook: React.FC<SelectBookProps> = ({ selectedBible }) => {
   }
 
   return (
-    <Select.Root>
+    <Select.Root onValueChange={handleSelectionChange}>
       <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
         <h3 className="text-3 font-medium">Book</h3>
         <IconChevronDown />
@@ -85,7 +92,7 @@ const SelectBook: React.FC<SelectBookProps> = ({ selectedBible }) => {
                 books.map((book) => (
                   <SelectItem
                     className="flex flex-col gap-6 group"
-                    value={book.id}
+                    value={`${book.id}:${book.name}`}
                     key={book.id}
                   >
                     <p className="text-body">{book.name}</p>
