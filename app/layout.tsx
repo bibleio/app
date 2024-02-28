@@ -56,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={ibmPlexSerif.className}>
-      <body className="bg-bg-white bg-no-repeat text-[#0C0C0C] bg-cover overflow-hidden h-screen p-96 flex flex-col flex-start gap-64">
+      <body className="bg-bg-white bg-no-repeat text-[#0C0C0C] text-body bg-cover overflow-hidden h-screen p-96 flex flex-col flex-start gap-64">
         <nav className="flex gap-32 items-center">
           <h1 className="text-1 font-bold">Biblio</h1>
           <div className="h-[1px] w-full bg-black/20"></div>

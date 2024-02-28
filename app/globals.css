@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.v {
+  vertical-align: super;
+  font-size: smaller;
+}
