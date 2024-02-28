@@ -102,7 +102,7 @@ const Home: React.FC = () => {
           <SelectBible onBibleSelection={handleBibleIdSelection} />
         </div>
         <h2 className="text-2 font-bold">
-          {`${bookAbbrev} ${chapterAbbrev}` || "Bible"}
+          {bookAbbrev || "Bible"} {chapterAbbrev || ""}
         </h2>
         <p className="text-body">Selected Bible: {selectedBible}</p>
         <p className="text-body">Selected book: {selectedBook}</p>
