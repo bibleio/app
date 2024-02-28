@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Viewport } from "next";
 import { IBM_Plex_Serif } from "next/font/google";
-import { IconSearch, IconSettingsDown } from "@tabler/icons-react";
+import { IconCode, IconSearch, IconSettingsDown } from "@tabler/icons-react";
 import "./globals.css";
 import InfoModal from "@/components/ui/InfoModal";
 
@@ -15,8 +15,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://biblio.day"),
   title: "Biblio",
-  description:
-    "A minimalist, simple Bible viewing website.",
+  description: "A minimalist, simple Bible viewing website.",
   keywords: [
     "Bible",
     "Online Bible",
@@ -26,18 +25,13 @@ export const metadata: Metadata = {
     "Bible hub",
     "Bible app",
     "Biblio",
-    "dukc",
-    "duckyhq",
-    "God",
-    "Jesus Christ",
   ],
   authors: [{ name: "dukc", url: "https://dukc.dev" }],
   creator: "dukc",
   publisher: "dukc",
   openGraph: {
     title: "Biblio",
-    description:
-      "A minimalist, simple Bible viewing website.",
+    description: "A minimalist, simple Bible viewing website.",
     url: "https://biblio.day",
     siteName: "dukc",
     images: [
