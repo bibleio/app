@@ -97,7 +97,7 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
       </Select.Trigger>
       <Select.Portal>
         <Select.Content
-          className="overflow-hidden relative bg-fg-1 rounded-[12px] h-[25vh] backdrop-blur-lg border border-stroke-1"
+          className="overflow-hidden relative bg-fg-1 rounded-[12px] h-[50vh] backdrop-blur-lg border border-stroke-1"
           align="start"
         >
           <Select.ScrollUpButton className="flex items-center justify-center h-[25px]">

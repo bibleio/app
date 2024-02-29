@@ -51,7 +51,7 @@ const Home: React.FC = () => {
   // Get Book ID
 
   let bookId = "null";
-  let bookAbbrev = "null";
+  let bookAbbrev = "Bible";
   if (selectedBook) {
     [bookId, bookAbbrev] = selectedBook.split(":");
     console.log(bookId + " " + bookAbbrev);
@@ -60,7 +60,7 @@ const Home: React.FC = () => {
   // Get Chapter ID
 
   let chapterId = "null";
-  let chapterAbbrev = "null";
+  let chapterAbbrev = "";
   if (selectedChapter) {
     [chapterId, chapterAbbrev] = selectedChapter.split(":");
     console.log(chapterId + " " + chapterAbbrev);
@@ -101,15 +101,12 @@ const Home: React.FC = () => {
           </div>
           <SelectBible onBibleSelection={handleBibleIdSelection} />
         </div>
-        <h2 className="text-2 font-bold">
-          {bookAbbrev || "Bible"} {chapterAbbrev || ""}
+        <h2 className="text-2 font-bold capitalize">
+          {bookAbbrev} {chapterAbbrev}
         </h2>
-        <p className="text-body">Selected Bible: {selectedBible}</p>
-        <p className="text-body">Selected book: {selectedBook}</p>
-        <p className="text-body">Selected chapter: {selectedChapter}</p>
-        <div className="w-full h-[1px] bg-black/20"></div>
         <div>
           <div
+            // @ts-ignore
             dangerouslySetInnerHTML={{ __html: chapterContent.content }}
             className="leading-8"
           />

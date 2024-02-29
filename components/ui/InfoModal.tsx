@@ -2,7 +2,6 @@
 
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import * as Switch from "@radix-ui/react-switch";
 import { IconInfoCircle, IconX } from "@tabler/icons-react";
 import LinkButton from "./LinkButton";
 
@@ -45,12 +44,6 @@ const InfoModal = () => (
               link="https://scripture.api.bible/"
             />
             <LinkButton text="GitHub" link="https://github.com/dukcc/biblio" />
-          </div>
-          <div className="flex gap-12 items-center">
-            <p className="text-sub">Dev Mode</p>
-            <Switch.Root className="w-[42px] h-[25px] bg-black/50 rounded-full relative data-[state=checked]:bg-accent outline-none cursor-pointer">
-              <Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full transition-transform duration-150 ease-out translate-x-[2.1px] will-change-transform data-[state=checked]:translate-x-[19px]" />
-            </Switch.Root>
           </div>
           <p className="text-sub">Version 1.0 - Licensed under GPL-3</p>
         </Dialog.Description>
