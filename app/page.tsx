@@ -85,33 +85,29 @@ const Home: React.FC = () => {
   }, [bibleId, chapterId]);
 
   return (
-    <div className="bg-fg-1 border border-stroke-1 rounded-[24px] h-full w-full px-[448px] max-[1550px]:px-128 max-[850px]:px-24 py-128 flex flex-col gap-32 min-h-0 overflow-clip overflow-y-scroll">
-      <div className="flex flex-col gap-24 w-full">
-        <div className="flex w-full justify-between">
-          <div className="flex gap-32">
-            <SelectBook
-              onBookSelection={handleBookIdSelection}
-              selectedBible={selectedBible}
-            />
-            <SelectChapter
-              onChapterSelection={handleChapterIdSelection}
-              selectedBible={selectedBible}
-              selectedBook={selectedBook}
-            />
-          </div>
-          <SelectBible onBibleSelection={handleBibleIdSelection} />
-        </div>
-        <h2 className="text-2 font-bold capitalize">
-          {bookAbbrev} {chapterAbbrev}
-        </h2>
-        <div>
-          <div
-            // @ts-ignore
-            dangerouslySetInnerHTML={{ __html: chapterContent.content }}
-            className="leading-8"
+    <div className="h-full w-full max-w-[1250px] px-[192px] max-[960px]:px-64 max-[530px]:px-16 flex flex-col gap-32">
+      <div className="flex w-full justify-between gap-32 flex-wrap">
+        <div className="flex gap-32">
+          <SelectBook
+            onBookSelection={handleBookIdSelection}
+            selectedBible={selectedBible}
+          />
+          <SelectChapter
+            onChapterSelection={handleChapterIdSelection}
+            selectedBible={selectedBible}
+            selectedBook={selectedBook}
           />
         </div>
+        <SelectBible onBibleSelection={handleBibleIdSelection} />
       </div>
+      <h2 className="text-2 font-bold capitalize">
+        {bookAbbrev} {chapterAbbrev}
+      </h2>
+      <div
+        // @ts-ignore
+        dangerouslySetInnerHTML={{ __html: chapterContent.content }}
+        className="leading-8 pb-256"
+      />
     </div>
   );
 };

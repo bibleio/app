@@ -85,7 +85,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
       </Select.Trigger>
       <Select.Portal>
         <Select.Content
-          className="overflow-hidden relative bg-fg-1 rounded-[12px] h-[65vh] backdrop-blur-lg border border-stroke-1"
+          className="overflow-hidden relative bg-fg-1 rounded-[12px] h-[65vh] backdrop-blur-lg border border-stroke-1 z-50 mt-128"
           align="start"
         >
           <Select.ScrollUpButton className="flex items-center justify-center h-[25px]">
@@ -133,11 +133,11 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   ({ children, className, ...props }, forwardedRef) => {
     return (
       <Select.Item
-        className="text-body leading-none flex items-center h-[40px] pr-32 pl-32 relative cursor-pointer ease-out duration-200 hover:text-accent hover:translate-x-6 outline-none"
+        className="text-body flex items-center h-[40px] max-[830px]:h-[64px] pr-32 pl-32 relative cursor-pointer ease-out duration-200 hover:text-accent hover:translate-x-6 outline-none"
         {...props}
         ref={forwardedRef}
       >
-        <Select.ItemText>{children}</Select.ItemText>
+        <Select.ItemText className="leading-8">{children}</Select.ItemText>
         <Select.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
           <IconCheck />
         </Select.ItemIndicator>
