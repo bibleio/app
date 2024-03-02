@@ -23,17 +23,14 @@ const Home: React.FC = () => {
 
   const handleBibleIdSelection = (value: string) => {
     setSelectedBible(value);
-    console.log(value);
   };
 
   const handleBookIdSelection = (value: string) => {
     setSelectedBook(value);
-    console.log(value);
   };
 
   const handleChapterIdSelection = (value: string) => {
     setSelectedChapter(value);
-    console.log(value);
   };
 
   // Split variables //
@@ -44,8 +41,6 @@ const Home: React.FC = () => {
   let bibleAbbrev = "null";
   if (selectedBible) {
     [bibleId, bibleAbbrev] = selectedBible.split(":");
-
-    console.log(bibleId + " " + bibleAbbrev);
   }
 
   // Get Book ID
@@ -54,7 +49,6 @@ const Home: React.FC = () => {
   let bookAbbrev = "Bible";
   if (selectedBook) {
     [bookId, bookAbbrev] = selectedBook.split(":");
-    console.log(bookId + " " + bookAbbrev);
   }
 
   // Get Chapter ID
@@ -63,7 +57,6 @@ const Home: React.FC = () => {
   let chapterAbbrev = "";
   if (selectedChapter) {
     [chapterId, chapterAbbrev] = selectedChapter.split(":");
-    console.log(chapterId + " " + chapterAbbrev);
   }
 
   // Get chapter content

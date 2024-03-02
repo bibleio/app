@@ -55,7 +55,6 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
         .then((response) => response.json())
         .then((data) => {
           setChapters(data.data);
-          console.log(data.data);
           setLoading(false);
         })
         .catch((error) => {
