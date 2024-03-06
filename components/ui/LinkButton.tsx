@@ -12,7 +12,7 @@ export default function LinkButton({
     <Link
       href={link}
       target="_blank"
-      className="flex gap-6 items-center group hover:text-accent duration-200 ease-out"
+      className="flex gap-4 items-center group hover:text-accent duration-200 ease-out"
     >
       {text}
       <IconArrowUpRight className="group-hover:rotate-45 duration-300 ease-out" />

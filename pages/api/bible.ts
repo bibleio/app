@@ -13,7 +13,6 @@ export default async function handler(
         "api-key": process.env.API_KEY || "",
       },
     });
-
     if (!response.ok) {
       throw new Error(`Failed to fetch data from ${apiUrl}`);
     }

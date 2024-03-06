@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import * as Select from "@radix-ui/react-select";
-import { IconCheck, IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import SelectItem from "./ui/SelectItem";
 import Loading from "./ui/Loading";
+import * as Select from "@radix-ui/react-select";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 interface Chapter {
   number: string;
@@ -67,19 +68,26 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
   if (loading) {
     return (
       <Select.Root>
-        <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none">
-          <h3 className="text-3 font-medium">Chapter</h3>
-          <IconChevronDown />
+        <Select.Trigger
+          className="flex gap-8 w-fit items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none"
+          aria-label="Chapter"
+        >
+          <Select.Value className="text-body truncate" placeholder="Chapter" />
+          <Select.Icon>
+            <IconChevronDown />
+          </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content className="overflow-hidden bg-fg-1 rounded-[12px] backdrop-blur-lg border border-stroke-1">
-            <Select.ScrollUpButton className="flex items-center justify-center h-[25px]">
+          <Select.Content className="overflow-hidden z-50 bg-fg-1 border border-stroke-1 rounded-[12px] backdrop-blur-2xl">
+            <Select.ScrollUpButton className="flex items-center justify-center h-24 bg-fg-1 cursor-default">
               <IconChevronUp />
             </Select.ScrollUpButton>
-            <Select.Viewport className="p-16">
-              <Loading />
+            <Select.Viewport className="p-12">
+              <Select.Group>
+                <Loading />
+              </Select.Group>
             </Select.Viewport>
-            <Select.ScrollDownButton className="flex items-center justify-center h-[25px]">
+            <Select.ScrollDownButton className="flex items-center justify-center h-24 bg-fg-1 cursor-default">
               <IconChevronDown />
             </Select.ScrollDownButton>
           </Select.Content>
@@ -90,19 +98,21 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
 
   return (
     <Select.Root onValueChange={handleSelectionChange}>
-      <Select.Trigger className="flex gap-8 items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out outline-none">
-        <h3 className="text-3 font-medium">Chapter</h3>
-        <IconChevronDown />
+      <Select.Trigger
+        className="flex gap-8 w-fit items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none"
+        aria-label="Chapter"
+      >
+        <Select.Value className="text-body truncate" placeholder="Chapter" />
+        <Select.Icon>
+          <IconChevronDown />
+        </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content
-          className="overflow-hidden relative bg-fg-1 rounded-[12px] h-[50vh] backdrop-blur-lg border border-stroke-1 z-50 mt-128"
-          align="start"
-        >
-          <Select.ScrollUpButton className="flex items-center justify-center h-[25px]">
+        <Select.Content className="overflow-hidden z-50 bg-fg-1 border border-stroke-1 rounded-[12px] backdrop-blur-2xl">
+          <Select.ScrollUpButton className="flex items-center justify-center h-24 bg-fg-1 cursor-default">
             <IconChevronUp />
           </Select.ScrollUpButton>
-          <Select.Viewport className="p-6">
+          <Select.Viewport className="p-12">
             <Select.Group>
               {chapters && chapters.length > 0 ? (
                 chapters.map((chapter) => (
@@ -122,7 +132,7 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
               )}
             </Select.Group>
           </Select.Viewport>
-          <Select.ScrollDownButton className="flex items-center justify-center h-[25px]">
+          <Select.ScrollDownButton className="flex items-center justify-center h-24 bg-fg-1 cursor-default">
             <IconChevronDown />
           </Select.ScrollDownButton>
         </Select.Content>
@@ -130,28 +140,5 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
     </Select.Root>
   );
 };
-
-interface SelectItemProps {
-  children: React.ReactNode;
-  className?: string;
-  value: string;
-}
-
-const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
-  ({ children, className, ...props }, forwardedRef) => {
-    return (
-      <Select.Item
-        className="text-body leading-none flex items-center h-[40px] pr-32 pl-32 relative cursor-pointer ease-out duration-200 hover:text-accent hover:translate-x-6 outline-none"
-        {...props}
-        ref={forwardedRef}
-      >
-        <Select.ItemText>{children}</Select.ItemText>
-        <Select.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
-          <IconCheck />
-        </Select.ItemIndicator>
-      </Select.Item>
-    );
-  }
-);
 
 export default SelectChapter;
