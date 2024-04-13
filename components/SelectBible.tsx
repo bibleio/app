@@ -96,7 +96,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
       >
         <Select.Value
           className="text-body truncate"
-          placeholder="Bible Version"
+          placeholder="King James (Authorised) Version (ENGKJV)"
         />
         <Select.Icon>
           <IconChevronDown />

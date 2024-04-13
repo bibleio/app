@@ -86,7 +86,7 @@ const SelectBook: React.FC<SelectBookProps> = ({
         className="flex gap-8 w-fit items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none"
         aria-label="Book"
       >
-        <Select.Value className="text-body truncate" placeholder="Book" />
+        <Select.Value className="text-body truncate" placeholder="Genesis" />
         <Select.Icon>
           <IconChevronDown />
         </Select.Icon>
