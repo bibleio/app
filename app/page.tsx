@@ -30,6 +30,7 @@ const Home: React.FC = () => {
   const [chapterContent, setChapterContent] = useState<ChapterContent[]>([]);
   const [viewAreaValue, setViewAreaValue] = useState<number[]>([25]);
   const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([75]);
+  const [fontSizeValue, setFontSizeValue] = useState<number[]>([25]);
 
   const handleBibleIdSelection = (value: string) => {
     setSelectedBible(value);
@@ -79,6 +80,11 @@ const Home: React.FC = () => {
   const handleLineSpacingValueChange = (value: number[]) => {
     setLineSpacingValue(value);
   };
+  // Get font size slider value
+
+  const handleFontSizeValueChange = (value: number[]) => {
+    setFontSizeValue(value);
+  };
 
   // Get chapter content
 
@@ -107,6 +113,7 @@ const Home: React.FC = () => {
   };
 
   const paddingClass = paddingClasses[viewAreaValue[0]];
+
   // Line spacing
   const lineSpacingClasses: { [key: number]: string } = {
     0: "leading-[110%]",
@@ -115,8 +122,18 @@ const Home: React.FC = () => {
     75: "leading-[200%]",
     100: "leading-[250%]",
   };
-
   const lineSpacingClass = lineSpacingClasses[lineSpacingValue[0]];
+
+  // Font size
+  const fontSizeClasses: { [key: number]: string } = {
+    0: "text-[10px]",
+    25: "text-[15px]",
+    50: "text-[18px]",
+    75: "text-[22px]",
+    100: "text-[28px]",
+  };
+
+  const fontSizeClass = fontSizeClasses[fontSizeValue[0]];
   return (
     <>
       <div
@@ -142,7 +159,7 @@ const Home: React.FC = () => {
         <div
           // @ts-ignore
           dangerouslySetInnerHTML={{ __html: chapterContent.content }}
-          className={`${lineSpacingClass} pb-256 eb-container`}
+          className={`${lineSpacingClass} ${fontSizeClass} pb-256 eb-container`}
         />
       </div>
       {isTextFormattingMenuOpen && (
@@ -150,6 +167,7 @@ const Home: React.FC = () => {
           isOpen={isTextFormattingMenuOpen}
           onViewAreaValueChange={handleViewAreaValueChange}
           onLineSpacingValueChange={handleLineSpacingValueChange}
+          onFontSizeValueChange={handleFontSizeValueChange}
         />
       )}
     </>
