@@ -18,11 +18,17 @@ interface ChapterContent {
 const Home: React.FC = () => {
   const { isTextFormattingMenuOpen } = useTextFormattingMenuStore();
 
-  const [selectedBible, setSelectedBible] = useState<string | null>(null);
-  const [selectedBook, setSelectedBook] = useState<string | null>(null);
-  const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
+  const [selectedBible, setSelectedBible] = useState<string | null>(
+    "de4e12af7f28f599-01:ENGKJV"
+  );
+  const [selectedBook, setSelectedBook] = useState<string | null>(
+    "GEN:Genesis"
+  );
+  const [selectedChapter, setSelectedChapter] = useState<string | null>(
+    "GEN.1:1"
+  );
   const [chapterContent, setChapterContent] = useState<ChapterContent[]>([]);
-  const [viewAreaValue, setViewAreaValue] = useState<number[]>([75]);
+  const [viewAreaValue, setViewAreaValue] = useState<number[]>([25]);
   const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([75]);
 
   const handleBibleIdSelection = (value: string) => {

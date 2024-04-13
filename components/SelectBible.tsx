@@ -22,7 +22,7 @@ interface SelectBibleProps {
 const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   const [bibles, setBibles] = useState<Bible[]>([]);
   const [loading, setLoading] = useState(true);
-  const [bibleAbbrev, setBibleAbbrev] = useState<string>("Bible Version");
+  const [bibleAbbrev, setBibleAbbrev] = useState<string>();
 
   const handleSelectionChange = (value: string) => {
     onBibleSelection(value);
@@ -89,10 +89,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   ).map((name) => bibles.find((bible) => bible.name === name));
 
   return (
-    <Select.Root
-      onValueChange={handleSelectionChange}
-      defaultValue="55ec700d9e0d77ea-01:engEMTV"
-    >
+    <Select.Root onValueChange={handleSelectionChange}>
       <Select.Trigger
         className="flex gap-8 w-fit items-center truncate disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none"
         aria-label="Bible Version"

@@ -12,8 +12,8 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
   onViewAreaValueChange,
   onLineSpacingValueChange,
 }) => {
-  const [viewAreaValue, setViewAreaValue] = useState<number[]>([50]);
-  const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([50]);
+  const [viewAreaValue, setViewAreaValue] = useState<number[]>([25]);
+  const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([75]);
   return (
     <div
       className={`fixed top-1/2 left-0 transform -translate-y-1/2 z-50
@@ -24,7 +24,7 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
           <p className="text-sub">Viewing Area</p>
           <Slider.Root
             className="relative flex items-center select-none touch-none w-[200px] h-5"
-            defaultValue={[75]}
+            defaultValue={[25]}
             max={100}
             step={25}
             onValueChange={(values) => {
@@ -45,7 +45,7 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
           <p className="text-sub">Line Spacing</p>
           <Slider.Root
             className="relative flex items-center select-none touch-none w-[200px] h-5"
-            defaultValue={[50]}
+            defaultValue={[75]}
             max={100}
             step={25}
             onValueChange={(values) => {
