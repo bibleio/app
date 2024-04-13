@@ -104,23 +104,23 @@ const Home: React.FC = () => {
     }
   }, [bibleId, chapterId]);
   // View area
-  const paddingClasses: { [key: number]: string } = {
-    0: "px-[384px]",
-    25: "px-256",
-    50: "px-128",
-    75: "px-64",
-    100: "px-0",
+  const viewAreaClasses: { [key: number]: string } = {
+    0: "px-[384px] max-[1090px]:px-256 max-[920px]:px-16",
+    25: "px-256 max-[920px]:px-16",
+    50: "px-128 max-[920px]:px-16",
+    75: "px-64 max-[920px]:px-16",
+    100: "px-0 max-[1320px]:px-16",
   };
 
-  const paddingClass = paddingClasses[viewAreaValue[0]];
+  const viewAreaClass = viewAreaClasses[viewAreaValue[0]];
 
   // Line spacing
   const lineSpacingClasses: { [key: number]: string } = {
     0: "leading-[110%]",
     25: "leading-[140%]",
     50: "leading-[180%]",
-    75: "leading-[200%]",
-    100: "leading-[250%]",
+    75: "leading-[210%]",
+    100: "leading-[260%]",
   };
   const lineSpacingClass = lineSpacingClasses[lineSpacingValue[0]];
 
@@ -137,7 +137,7 @@ const Home: React.FC = () => {
   return (
     <>
       <div
-        className={`h-full w-full ${paddingClass} max-w-[1250px] flex flex-col gap-32`}
+        className={`h-full w-full ${viewAreaClass} max-w-[1250px] flex flex-col gap-32`}
       >
         <div className="flex w-full justify-between gap-32 flex-wrap">
           <div className="flex gap-32">

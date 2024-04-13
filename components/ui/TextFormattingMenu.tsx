@@ -19,12 +19,13 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
   const [fontSizeValue, setFontSizeValue] = useState<number[]>([25]);
   return (
     <div
-      className={`fixed top-1/2 left-0 transform -translate-y-1/2 z-50
-       ${isOpen ? "block" : "hidden"}`}
+      className={`fixed top-1/2 left-0 z-50 min-[700px]:-translate-y-1/2 min-[700px]:ml-12 max-[700px]:left-1/2 max-[700px]:-translate-x-1/2 ${
+        isOpen ? "block" : "hidden"
+      }`}
     >
-      <div className="flex flex-col p-24 gap-24 bg-fg-1 border border-stroke-1 rounded-24 ml-12">
+      <div className="flex flex-col p-24 gap-24 bg-fg-1 border border-stroke-1 rounded-24 backdrop-blur-3xl">
         <h2 className="text-2 font-bold">Text</h2>
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-12 max-[920px]:hidden">
           <p className="text-sub">Viewing Area</p>
           <Slider.Root
             className="relative flex items-center select-none touch-none w-[200px] h-5"
