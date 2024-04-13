@@ -7,6 +7,9 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["var(--font-ibmPlexSerif)"],
+    },
     fontSize: {
       "1": "32px",
       "2": "24px",

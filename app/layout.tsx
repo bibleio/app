@@ -46,6 +46,7 @@ export const metadata: Metadata = {
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-ibmPlexSerif",
 });
 
 export default function RootLayout({
@@ -54,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={ibmPlexSerif.className}>
+    <html lang="en" className={`${ibmPlexSerif.className}`}>
       <body className="bg-bg-white bg-fixed text-[#0C0C0C] text-body bg-cover overflow-x-hidden h-screen flex flex-col items-center gap-64 pb-256 py-12 max-[1250px]:py-0">
         <Nav />
         {children}
