@@ -117,9 +117,10 @@
 }
 
 .eb-container .v {
-  vertical-align: super;
-  font-size: smaller;
+  font-size: 11px;
   color: #4c4c4c;
+  vertical-align: baseline;
+  margin-right: 2px;
 }
 
 .eb-container blockquote,

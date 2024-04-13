@@ -22,7 +22,8 @@ const Home: React.FC = () => {
   const [selectedBook, setSelectedBook] = useState<string | null>(null);
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const [chapterContent, setChapterContent] = useState<ChapterContent[]>([]);
-  const [sliderValue, setSliderValue] = useState<number[]>([50]);
+  const [viewAreaValue, setViewAreaValue] = useState<number[]>([75]);
+  const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([75]);
 
   const handleBibleIdSelection = (value: string) => {
     setSelectedBible(value);
@@ -64,8 +65,13 @@ const Home: React.FC = () => {
 
   // Get view area slider value
 
-  const handleSliderValueChange = (value: number[]) => {
-    setSliderValue(value);
+  const handleViewAreaValueChange = (value: number[]) => {
+    setViewAreaValue(value);
+  };
+  // Get line spacing slider value
+
+  const handleLineSpacingValueChange = (value: number[]) => {
+    setLineSpacingValue(value);
   };
 
   // Get chapter content
@@ -85,6 +91,7 @@ const Home: React.FC = () => {
         });
     }
   }, [bibleId, chapterId]);
+  // View area
   const paddingClasses: { [key: number]: string } = {
     0: "px-0",
     25: "px-64",
@@ -93,7 +100,17 @@ const Home: React.FC = () => {
     100: "px-[384px]",
   };
 
-  const paddingClass = paddingClasses[sliderValue[0]];
+  const paddingClass = paddingClasses[viewAreaValue[0]];
+  // Line spacing
+  const lineSpacingClasses: { [key: number]: string } = {
+    0: "leading-[110%]",
+    25: "leading-[140%]",
+    50: "leading-[180%]",
+    75: "leading-[200%]",
+    100: "leading-[250%]",
+  };
+
+  const lineSpacingClass = lineSpacingClasses[lineSpacingValue[0]];
   return (
     <>
       <div
@@ -119,13 +136,14 @@ const Home: React.FC = () => {
         <div
           // @ts-ignore
           dangerouslySetInnerHTML={{ __html: chapterContent.content }}
-          className="leading-8 pb-256 eb-container"
+          className={`${lineSpacingClass} pb-256 eb-container`}
         />
       </div>
       {isTextFormattingMenuOpen && (
         <TextFormattingMenu
           isOpen={isTextFormattingMenuOpen}
-          onSliderValueChange={handleSliderValueChange}
+          onViewAreaValueChange={handleViewAreaValueChange}
+          onLineSpacingValueChange={handleLineSpacingValueChange}
         />
       )}
     </>
