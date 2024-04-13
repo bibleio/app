@@ -93,11 +93,11 @@ const Home: React.FC = () => {
   }, [bibleId, chapterId]);
   // View area
   const paddingClasses: { [key: number]: string } = {
-    0: "px-0",
-    25: "px-64",
+    0: "px-[384px]",
+    25: "px-256",
     50: "px-128",
-    75: "px-256",
-    100: "px-[384px]",
+    75: "px-64",
+    100: "px-0",
   };
 
   const paddingClass = paddingClasses[viewAreaValue[0]];
