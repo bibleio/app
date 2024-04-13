@@ -12,7 +12,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, ExtendedSelectItemProps>(
   ({ children, className, ...props }, forwardedRef) => {
     return (
       <Select.Item
-        className="text-body leading-none max-[400px]:leading-6 flex items-center h-fit py-8 pr-[35px] pl-[25px] relative cursor-pointer select-none data-[disabled]:text-black/50 data-[state=on]:text-accent data-[disabled]:pointer-events-none outline-none data-[highlighted]:text-accent data-[highlighted]:translate-x-[6px] duration-150 ease-out"
+        className={`text-body leading-none max-[400px]:leading-6 flex items-center h-fit py-8 pr-[35px] pl-[25px] relative cursor-pointer select-none data-[disabled]:text-black/50 data-[state=on]:text-accent data-[disabled]:pointer-events-none outline-none data-[highlighted]:text-accent data-[highlighted]:translate-x-[6px] duration-150 ease-out ${className}`}
         {...props}
         ref={forwardedRef}
       >

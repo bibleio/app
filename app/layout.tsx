@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Viewport } from "next";
-import { IBM_Plex_Serif } from "next/font/google";
+
+import { IBM_Plex_Serif, Inter, Quicksand, Tinos } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
+import localFont from "next/font/local";
+
 import "./globals.css";
 import Nav from "@/components/ui/Nav";
 
@@ -46,7 +50,28 @@ export const metadata: Metadata = {
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
-  variable: "--font-ibmPlexSerif",
+  variable: "--font-ibm-plex-serif",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const quickSand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+});
+
+const tinos = Tinos({
+  subsets: ["latin"],
+  variable: "--font-tinos",
+  weight: ["400", "700"],
+});
+
+const openDyslexic = localFont({
+  src: "./localFonts/opendyslexic.woff2",
+  variable: "--font-open-dyslexic",
 });
 
 export default function RootLayout({
@@ -55,8 +80,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${ibmPlexSerif.className}`}>
-      <body className="bg-bg-white bg-fixed text-[#0C0C0C] text-body bg-cover overflow-x-hidden h-screen flex flex-col items-center gap-64 pb-256 py-12 max-[1250px]:py-0">
+    <html
+      lang="en"
+      className={`${ibmPlexSerif.variable} ${inter.variable} ${quickSand.variable} ${tinos.variable} ${GeistMono.variable} ${openDyslexic.variable}`}
+    >
+      <body
+        className={`bg-bg-white font-ibm-serif bg-fixed text-[#0C0C0C] text-body bg-cover overflow-x-hidden h-screen flex flex-col items-center gap-64 pb-256 py-12 max-[1250px]:py-0`}
+      >
         <Nav />
         {children}
       </body>

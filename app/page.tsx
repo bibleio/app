@@ -70,6 +70,8 @@ const Home: React.FC = () => {
     [chapterId, chapterAbbrev] = selectedChapter.split(":");
   }
 
+  // Text Formatting //
+
   // Get view area slider value
 
   const handleViewAreaValueChange = (value: number[]) => {

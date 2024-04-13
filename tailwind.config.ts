@@ -8,7 +8,12 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      sans: ["var(--font-ibmPlexSerif)"],
+      "ibm-serif": ["var(--font-ibm-plex-serif)"],
+      inter: ["var(--font-inter)"],
+      quicksand: ["var(--font-quicksand)"],
+      tinos: ["var(--font-tinos)"],
+      "geist-mono": ["var(--font-geist-mono)"],
+      "open-dyslexic": ["var(--font-open-dyslexic)"],
     },
     fontSize: {
       "1": "32px",
