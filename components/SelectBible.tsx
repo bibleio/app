@@ -42,7 +42,6 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
       .then((response) => response.json())
       .then((data) => {
         setBibles(data.data);
-        console.log("the data: ", data);
         setLoading(false);
       })
       .catch((error) => {

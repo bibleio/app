@@ -25,7 +25,6 @@ const SelectBook: React.FC<SelectBookProps> = ({
   let bibleAbbrev = "null";
   if (selectedBible) {
     [bibleId, bibleAbbrev] = selectedBible.split(":");
-    console.log(bibleId + bibleAbbrev);
   }
 
   const handleSelectionChange = (value: string) => {
@@ -33,7 +32,6 @@ const SelectBook: React.FC<SelectBookProps> = ({
   };
 
   useEffect(() => {
-    console.log("Selected Bible:", selectedBible); // Log the selectedBible prop
     if (selectedBible) {
       const endpoint = `/bibles/${bibleId}/books`;
       const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
@@ -41,7 +39,6 @@ const SelectBook: React.FC<SelectBookProps> = ({
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
-          console.log("Fetched books:", data); // Log the fetched data
           setBooks(data.data);
           setLoading(false);
         })

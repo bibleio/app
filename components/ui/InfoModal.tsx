@@ -2,19 +2,14 @@
 
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import * as Switch from "@radix-ui/react-switch";
 import { IconInfoCircle, IconX } from "@tabler/icons-react";
 import LinkButton from "./LinkButton";
-interface InfoModalProps {
-  onSwitchChange: (checked: boolean) => void;
-  isChecked: boolean;
-}
 
-const InfoModal: React.FC<InfoModalProps> = ({ onSwitchChange, isChecked }) => {
+const InfoModal: React.FC = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <IconInfoCircle className="hover:-translate-y-[1px] hover:cursor-pointer active:translate-y-4 hover:text-accent duration-200 ease-out" />
+        <IconInfoCircle className="hover:-translate-y-[1px] hover:cursor-pointer active:translate-y-4 duration-200 ease-out" />
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed bg-white/40 z-59 backdrop-blur-sm data-[state=open]:animate-overlayShow inset-0" />
@@ -25,7 +20,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ onSwitchChange, isChecked }) => {
         >
           <div className="flex w-full justify-between">
             <Dialog.Title className="text-3 font-medium">
-              About Biblio
+              About Bibleio
             </Dialog.Title>
             <Dialog.Close asChild>
               <button
@@ -39,28 +34,10 @@ const InfoModal: React.FC<InfoModalProps> = ({ onSwitchChange, isChecked }) => {
 
           <Dialog.Description className="flex flex-col gap-12">
             <p className="text-body">
-              Biblio is a minimalist, open-source, simple Bible viewing app.
+              Bibleio is a minimalist, open-source, simple Bible viewing app.
               <br />
-              Biblio currently only supports English.
+              Bibleio currently only supports English.
             </p>
-            <form>
-              <div className="flex items-center">
-                <Switch.Root
-                  className="w-[42px] h-[25px] rounded-full relative bg-black/10 border border-stroke-1 outline-none cursor-default"
-                  id="dev-mode"
-                  checked={isChecked}
-                  onCheckedChange={onSwitchChange}
-                >
-                  <Switch.Thumb className="block w-[21px] h-[21px] bg-black data-[state=checked]:bg-accent rounded-full transition-transform duration-100 translate-x-2 will-change-transform data-[state=checked]:translate-x-[18px]" />
-                </Switch.Root>
-                <label
-                  className="text-sub leading-none ml-8"
-                  htmlFor="dev-mode"
-                >
-                  Show select metadata (dev mode)
-                </label>
-              </div>
-            </form>
 
             <div className="flex flex-wrap gap-12">
               <LinkButton text="Made by dukc" link="https://dukc.dev" />
@@ -70,10 +47,10 @@ const InfoModal: React.FC<InfoModalProps> = ({ onSwitchChange, isChecked }) => {
               />
               <LinkButton
                 text="GitHub"
-                link="https://github.com/dukcc/biblio"
+                link="https://github.com/bibleio/bibleio"
               />
             </div>
-            <p className="text-sub">Version 1.0 - Licensed under GPL-3</p>
+            <p className="text-sub">Version 1.1 - Licensed under GPL-3</p>
           </Dialog.Description>
         </Dialog.Content>
       </Dialog.Portal>
