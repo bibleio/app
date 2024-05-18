@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const { isTextFormattingMenuOpen } = useTextFormattingMenuStore();
 
   const [selectedBible, setSelectedBible] = useState<string | null>(
-    "de4e12af7f28f599-01:ENGKJV"
+    "9879dbb7cfe39e4d-01:WEB"
   );
   const [selectedBook, setSelectedBook] = useState<string | null>(
     "GEN:Genesis"

@@ -96,7 +96,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
       >
         <Select.Value
           className="text-body truncate"
-          placeholder="King James (Authorised) Version (ENGKJV)"
+          placeholder="World English Bible (WEB)"
         />
         <Select.Icon>
           <IconChevronDown />
@@ -108,7 +108,7 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
             <IconChevronUp />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-12">
-            <Select.Group>
+            <Select.Group className="flex flex-col items-start">
               {uniqueBibles.length > 0 ? (
                 uniqueBibles
                   .filter((bible) => bible && bible.language.name === "English")

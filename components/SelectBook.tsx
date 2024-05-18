@@ -97,7 +97,7 @@ const SelectBook: React.FC<SelectBookProps> = ({
             <IconChevronUp />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-12">
-            <Select.Group>
+            <Select.Group className="flex flex-col items-start">
               {books && books.length > 0 ? (
                 books.map((book) => (
                   <SelectItem

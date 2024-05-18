@@ -113,7 +113,7 @@ const SelectChapter: React.FC<SelectChapterProps> = ({
             <IconChevronUp />
           </Select.ScrollUpButton>
           <Select.Viewport className="p-12">
-            <Select.Group>
+            <Select.Group className="flex flex-col items-start">
               {chapters && chapters.length > 0 ? (
                 chapters.map((chapter) => (
                   <SelectItem
