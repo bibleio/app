@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
-import * as Select from "@radix-ui/react-select";
-import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
-import SelectItem from "./SelectItem";
+import {
+  Select,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+} from "./ui/Select";
 
 interface TextFormattingMenuProps {
   isOpen: boolean;
@@ -59,7 +63,7 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
               <Slider.Range className="absolute bg-black/50 rounded-full h-full" />
             </Slider.Track>
             <Slider.Thumb
-              className="block size-20 bg-accent rounded-[10px] hover:scale-[1.2] duration-200 ease-out focus:scale-90"
+              className="block size-20 bg-light-accent-navy rounded-[10px] hover:scale-[1.2] duration-200 ease-out focus:scale-90"
               aria-label="Viewing Area"
             />
           </Slider.Root>
@@ -80,7 +84,7 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
               <Slider.Range className="absolute bg-black/50 rounded-full h-full" />
             </Slider.Track>
             <Slider.Thumb
-              className="block size-20 bg-accent rounded-[10px] hover:scale-[1.2] duration-200 ease-out focus:scale-90"
+              className="block size-20 bg-light-accent-navy rounded-[10px] hover:scale-[1.2] duration-200 ease-out focus:scale-90"
               aria-label="Line Spacing"
             />
           </Slider.Root>
@@ -101,65 +105,36 @@ const TextFormattingMenu: React.FC<TextFormattingMenuProps> = ({
               <Slider.Range className="absolute bg-black/50 rounded-full h-full" />
             </Slider.Track>
             <Slider.Thumb
-              className="block size-20 bg-accent rounded-[10px] hover:scale-[1.2] duration-200 ease-out focus:scale-90"
+              className="block size-20 bg-light-accent-navy rounded-[10px] hover:scale-[1.2] duration-200 ease-out focus:scale-90"
               aria-label="Font Size"
             />
           </Slider.Root>
         </div>
         <div className="flex flex-col gap-12">
           <p className="text-sub">Font Family</p>
-          <Select.Root
-            defaultValue="ibm-serif"
-            onValueChange={(values) => updateFontFamily(values)}
-          >
-            <Select.Trigger
-              className="flex gap-8 w-fit items-center disabled:text-black/30 disabled:cursor-not-allowed enabled:hover:-translate-y-[1px] enabled:active:translate-y-4 hover:text-accent duration-200 ease-out  outline-none"
-              aria-label="Font Family"
-            >
-              <Select.Value
-                className="text-body"
-                placeholder="IBM Plex Serif"
-              />
-              <Select.Icon>
-                <IconChevronDown />
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content className="overflow-hidden z-50 bg-fg-1 border border-stroke-1 rounded-[12px] backdrop-blur-2xl">
-                <Select.ScrollUpButton className="flex items-center justify-center h-24 bg-fg-1 cursor-default">
-                  <IconChevronUp />
-                </Select.ScrollUpButton>
-                <Select.Viewport className="p-12">
-                  <Select.Group>
-                    <SelectItem value="ibm-serif" className="font-ibm-serif">
-                      IBM Plex Serif
-                    </SelectItem>
-                    <SelectItem value="inter" className="font-inter">
-                      Inter
-                    </SelectItem>
-                    <SelectItem value="quicksand" className="font-quicksand">
-                      Quicksand
-                    </SelectItem>
-                    <SelectItem value="tinos" className="font-tinos">
-                      Tinos
-                    </SelectItem>
-                    <SelectItem value="geist-mono" className="font-geist-mono">
-                      Geist Mono
-                    </SelectItem>
-                    <SelectItem
-                      value="open-dyslexic"
-                      className="font-open-dyslexic"
-                    >
-                      OpenDyslexic
-                    </SelectItem>
-                  </Select.Group>
-                </Select.Viewport>
-                <Select.ScrollDownButton className="flex items-center justify-center h-24 bg-fg-1 cursor-default">
-                  <IconChevronDown />
-                </Select.ScrollDownButton>
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
+
+          <Select label="Lora" onValueChange={updateFontFamily}>
+            <SelectGroup>
+              <SelectItem value="lora" className="font-lora">
+                Lora
+              </SelectItem>
+              <SelectItem value="inter" className="font-inter">
+                Inter
+              </SelectItem>
+              <SelectItem value="quicksand" className="font-quicksand">
+                Quicksand
+              </SelectItem>
+              <SelectItem value="tinos" className="font-tinos">
+                Tinos
+              </SelectItem>
+              <SelectItem value="geist-mono" className="font-geist-mono">
+                Geist Mono
+              </SelectItem>
+              <SelectItem value="open-dyslexic" className="font-open-dyslexic">
+                OpenDyslexic
+              </SelectItem>
+            </SelectGroup>
+          </Select>
         </div>
       </div>
     </div>

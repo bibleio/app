@@ -3,7 +3,7 @@
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { IconInfoCircle, IconX } from "@tabler/icons-react";
-import LinkButton from "./LinkButton";
+import LinkButton from "./ui/LinkButton";
 
 const InfoModal: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const InfoModal: React.FC = () => {
       fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
         >
           <div className="flex w-full justify-between">
-            <Dialog.Title className="text-3 font-medium">
+            <Dialog.Title className="h3 font-medium">
               About Bibleio
             </Dialog.Title>
             <Dialog.Close asChild>
@@ -33,7 +33,7 @@ const InfoModal: React.FC = () => {
           </div>
 
           <Dialog.Description className="flex flex-col gap-12">
-            <p className="text-body">
+            <p className="body">
               Bibleio is a minimalist, open-source, simple Bible viewing app.
               <br />
               Bibleio currently only supports English.
@@ -50,7 +50,7 @@ const InfoModal: React.FC = () => {
                 link="https://github.com/bibleio/bibleio"
               />
             </div>
-            <p className="text-sub">Version 1.1 - Licensed under GPL-3</p>
+            <p className="sub">Version 1.1 - Licensed under GPL-3</p>
           </Dialog.Description>
         </Dialog.Content>
       </Dialog.Portal>

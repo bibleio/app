@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "pages/api/bibles.js",
-    "next.config.mjs"
+    "next.config.mjs",
+    "components/ui/textFormattingMenuStore.ts"
   ],
   "exclude": ["node_modules"]
 }

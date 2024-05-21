@@ -5,7 +5,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const endpoint = req.query.endpoint as string;
+  console.log("Extracted endpoint:", endpoint);
   const apiUrl = "https://api.scripture.api.bible/v1" + endpoint;
+  console.log("Fetching data from:", apiUrl);
 
   try {
     const response = await fetch(apiUrl, {
@@ -19,8 +21,7 @@ export default async function handler(
 
     const data = await response.json();
     res.status(200).json(data);
-  } catch (error) {
-    // @ts-ignore
+  } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 }

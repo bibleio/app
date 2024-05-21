@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Tailwind Classes */
+
+.h1 {
+  @apply text-h1 font-semibold leading-[115%];
+}
+.h2 {
+  @apply text-h2 font-medium leading-[115%];
+}
+.h3 {
+  @apply text-h3 font-medium leading-[115%];
+}
+.h4 {
+  @apply text-h4 font-normal leading-[125%];
+}
+.body {
+  @apply text-body font-normal leading-[100%];
+}
+.body-paragraph {
+  @apply text-body font-normal leading-[225%];
+}
+.strong-body {
+  @apply text-body font-semibold leading-[100%];
+}
+.subtext {
+  @apply text-sub font-normal leading-[100%];
+}
+
+.component-hover-effect {
+  @apply hover:-translate-y-4 active:translate-y-8 duration-150 ease-out;
+}
+
+/* API.Bible STYLE CLASSES */
+
 .v {
   vertical-align: super;
   font-size: smaller;
