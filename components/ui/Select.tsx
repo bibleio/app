@@ -34,7 +34,7 @@ export const Select = ({
       required={required}
     >
       <RadixSelect.Trigger
-        className="bg-light-fg-2 border border-black shadow-component rounded-12 flex justify-between px-16 py-8 gap-12 outline-none component-hover-effect"
+        className="bg-light-fg-2 border border-black shadow-component rounded-12 flex justify-between px-16 py-8 gap-12 outline-none component-hover-effect disabled:pointer-events-none radix-disabled:cursor-not-allowed radix-disabled:opacity-50"
         aria-label={label}
       >
         <RadixSelect.Value placeholder={label} />
@@ -90,12 +90,12 @@ export const SelectGroup = ({ children }: { children: ReactNode }) => {
 
 export const SelectLabel = ({ children }: { children: ReactNode }) => {
   return (
-    <RadixSelect.Label className="text-sub text-black/60">
+    <RadixSelect.Label className="text-sub text-black/90 px-24">
       {children}
     </RadixSelect.Label>
   );
 };
 
 export const SelectSeparator = () => {
-  return <RadixSelect.Separator className="h-[1px] w-full bg-black/10" />;
+  return <RadixSelect.Separator className="h-[1px] w-full bg-black/50" />;
 };

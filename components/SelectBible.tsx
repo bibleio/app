@@ -1,13 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Select,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-} from "./ui/Select";
+import { Select, SelectGroup, SelectItem, SelectLabel } from "./ui/Select";
+import { useParams, useRouter } from "next/navigation";
 
 interface Bible {
   name: string;
@@ -18,23 +13,37 @@ interface Bible {
     name: string;
   };
 }
-interface SelectBibleProps {
-  onBibleSelection: (value: string) => void;
-}
 
-const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
+type SortedLanguageGroupsType = {
+  [key: string]: Bible[];
+};
+
+const SelectBible: React.FC = () => {
+  const router = useRouter();
+  const params = useParams();
+
   const [bibles, setBibles] = useState<Bible[]>([]);
   const [loading, setLoading] = useState(true);
-  const [bibleAbbrev, setBibleAbbrev] = useState<string>();
+  const [languageGroups, setLanguageGroups] = useState<{
+    [key: string]: Bible[];
+  }>({});
+
+  const bookId = params?.slug?.[1] ?? null;
+  const chapterAbbrev = params?.slug?.[2] ?? null;
 
   const handleSelectionChange = (value: string) => {
-    onBibleSelection(value);
     let bibleId = "null";
     let bibleAbbrev = "null";
     if (value) {
       [bibleId, bibleAbbrev] = value.split(":");
     }
-    setBibleAbbrev(bibleAbbrev.toUpperCase());
+    if (bookId && chapterAbbrev) {
+      router.push(`/bible/${bibleId}/${bookId}/${chapterAbbrev}`);
+    } else if (bookId) {
+      router.push(`/bible/${bibleId}/${bookId}`);
+    } else {
+      router.push(`/bible/${bibleId}`);
+    }
   };
 
   useEffect(() => {
@@ -46,6 +55,28 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
       .then((data) => {
         setBibles(data.data);
         setLoading(false);
+
+        const languageGroups = data.data.reduce((acc: any, bible: any) => {
+          const langKey = bible.language.name;
+          if (!acc[langKey]) {
+            acc[langKey] = [];
+          }
+          acc[langKey].push(bible);
+          return acc;
+        }, {} as { [key: string]: Bible[] });
+
+        const sortedLanguages = Object.keys(languageGroups).sort((a, b) => {
+          if (a.toLowerCase() === "english") return -1;
+          if (b.toLowerCase() === "english") return 1;
+          return a.localeCompare(b);
+        });
+
+        const sortedLanguageGroups: SortedLanguageGroupsType = {};
+        sortedLanguages.forEach((lang) => {
+          sortedLanguageGroups[lang] = languageGroups[lang];
+        });
+
+        setLanguageGroups(sortedLanguageGroups);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -54,36 +85,35 @@ const SelectBible: React.FC<SelectBibleProps> = ({ onBibleSelection }) => {
   }, []);
 
   if (loading) {
-    return <p className="body">loading</p>;
+    return (
+      <Select label="Bible Version" disabled>
+        <SelectGroup>
+          <SelectItem value="disabled">disabled</SelectItem>
+        </SelectGroup>
+      </Select>
+    );
   }
 
-  const uniqueBibles = Array.from(
-    new Set((bibles || []).map((bible) => bible.name))
-  ).map((name) => bibles.find((bible) => bible.name === name));
-
   return (
-    <Select label="WEB" onValueChange={handleSelectionChange}>
-      <SelectGroup>
-        {uniqueBibles.length > 0 ? (
-          uniqueBibles
-            .filter((bible) => bible && bible.language.name === "English")
-            .map((bible) => (
+    <Select label="Bible Version" onValueChange={handleSelectionChange}>
+      {Object.entries(languageGroups).map(([language, bibles], index) => (
+        <React.Fragment key={language}>
+          <SelectGroup>
+            <SelectLabel>{language}</SelectLabel>
+            {bibles.map((bible) => (
               <SelectItem
-                value={`${bible ? bible.id : ""}:${
-                  bible ? bible.abbreviation : ""
-                }`}
-                key={bible ? bible.id : ""}
+                value={`${bible.id}:${bible.abbreviation}`}
+                key={bible.id}
               >
-                {bible ? bible.name : ""} (
-                {bible ? bible.abbreviation.toUpperCase() : ""})
+                <div className="flex flex-col gap-4">
+                  <p className="body">{bible.name}</p>
+                  <p className="subtext">{bible.description}</p>
+                </div>
               </SelectItem>
-            ))
-        ) : (
-          <p className="text-body text-red-700">
-            Sorry, this service is unavalible right now. Come back later!
-          </p>
-        )}
-      </SelectGroup>
+            ))}
+          </SelectGroup>
+        </React.Fragment>
+      ))}
     </Select>
   );
 };

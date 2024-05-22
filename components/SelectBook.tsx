@@ -1,63 +1,60 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Select,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-} from "./ui/Select";
+import { Select, SelectGroup, SelectItem } from "./ui/Select";
+import { useRouter, useParams } from "next/navigation";
 interface Book {
   name: string;
   id: string;
 }
-interface SelectBookProps {
-  selectedBible: string | null;
-  onBookSelection: (value: string) => void;
-}
 
-const SelectBook: React.FC<SelectBookProps> = ({
-  selectedBible,
-  onBookSelection,
-}) => {
+const SelectBook: React.FC = () => {
+  const router = useRouter();
+  const params = useParams();
+
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
-  let bibleId = "null";
-  let bibleAbbrev = "null";
-  if (selectedBible) {
-    [bibleId, bibleAbbrev] = selectedBible.split(":");
-  }
+  const bibleId = params?.slug?.[0] ?? null;
+  const chapterAbbrev = params?.slug?.[2] ?? null;
 
   const handleSelectionChange = (value: string) => {
-    onBookSelection(value);
+    let bookId = "null";
+    let bookAbbrev = "null";
+    if (value) {
+      [bookId, bookAbbrev] = value.split(":");
+    }
+    router.push(`/bible/${bibleId}/${bookId}/1`);
   };
 
   useEffect(() => {
-    if (selectedBible) {
-      const endpoint = `/bibles/${bibleId}/books`;
-      const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
+    const endpoint = `/bibles/${bibleId}/books`;
+    const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
-      fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          setBooks(data.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching books:", error);
-          setLoading(false);
-        });
-    }
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching books:", error);
+        setLoading(false);
+      });
   }, [bibleId]);
 
   if (loading) {
-    return <p className="body">loadingg</p>;
+    return (
+      <Select label="Book" disabled>
+        <SelectGroup>
+          <SelectItem value="disabled">disabled</SelectItem>
+        </SelectGroup>
+      </Select>
+    );
   }
 
   return (
-    <Select label="Genesis" onValueChange={handleSelectionChange}>
+    <Select label="Book" onValueChange={handleSelectionChange}>
       <SelectGroup>
         {books && books.length > 0 ? (
           books.map((book) => (

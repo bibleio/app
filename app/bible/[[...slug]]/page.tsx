@@ -25,61 +25,12 @@ interface HomeProps {
 const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
   const { isTextFormattingMenuOpen } = useTextFormattingMenuStore();
 
-  const [selectedBible, setSelectedBible] = useState<string | null>(
-    "9879dbb7cfe39e4d-01:WEB"
-  );
-  const [selectedBook, setSelectedBook] = useState<string | null>(
-    "GEN:Genesis"
-  );
-  const [selectedChapter, setSelectedChapter] = useState<string | null>(
-    "GEN.1:1"
-  );
-
   const [chapterContent, setChapterContent] = useState<ChapterContent[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [viewAreaValue, setViewAreaValue] = useState<number[]>([25]);
   const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([75]);
   const [fontSizeValue, setFontSizeValue] = useState<number[]>([25]);
-
-  const handleBibleIdSelection = (value: string) => {
-    setSelectedBible(value);
-  };
-
-  const handleBookIdSelection = (value: string) => {
-    setSelectedBook(value);
-  };
-
-  const handleChapterIdSelection = (value: string) => {
-    setSelectedChapter(value);
-  };
-
-  // Split variables //
-
-  // Get Bible ID
-
-  let bibleId = "null";
-  let bibleAbbrev = "null";
-  if (selectedBible) {
-    [bibleId, bibleAbbrev] = selectedBible.split(":");
-  }
-
-  // Get Book ID
-
-  let bookId = "null";
-  let bookAbbrev = "Bible";
-  if (selectedBook) {
-    [bookId, bookAbbrev] = selectedBook.split(":");
-  }
-
-  // Get Chapter ID
-
-  let chapterId = "null";
-  let chapterAbbrev = "";
-  if (selectedChapter) {
-    [chapterId, chapterAbbrev] = selectedChapter.split(":");
-  }
-
   // Text Formatting //
 
   // Get view area slider value
@@ -101,7 +52,7 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
   // Get chapter content
 
   useEffect(() => {
-    if (selectedBible && selectedChapter) {
+    if (params.slug && params.slug.length >= 3) {
       const endpoint = `/bibles/${params["slug"][0]}/chapters/${params["slug"][1]}.${params["slug"][2]}`;
       const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
@@ -112,14 +63,16 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
             setChapterContent(data.data);
             setErrorMessage(null);
           } else {
-            setErrorMessage("Error code 90");
+            setErrorMessage(
+              "Error code 90 - Possibly the book/chapter you're trying to access in this Bible/book is not avalaible."
+            );
           }
         })
         .catch((error) => {
           console.error("Error:", error);
         });
     }
-  }, [bibleId, chapterId]);
+  }, [params]);
 
   // View area
   const viewAreaClasses: { [key: number]: string } = {
@@ -158,22 +111,12 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
         className={`h-full w-full ${viewAreaClass} flex flex-col gap-24 py-64 items-start justify-center`}
       >
         <div className="flex w-full justify-between gap-32 flex-wrap">
-          <div className="flex gap-32">
-            <SelectBook
-              onBookSelection={handleBookIdSelection}
-              selectedBible={selectedBible}
-            />
-            <SelectChapter
-              onChapterSelection={handleChapterIdSelection}
-              selectedBible={selectedBible}
-              selectedBook={selectedBook}
-            />
+          <div className="flex gap-12">
+            <SelectBook />
+            <SelectChapter />
           </div>
-          <SelectBible onBibleSelection={handleBibleIdSelection} />
+          <SelectBible />
         </div>
-        <h2 className="h2 font-bold capitalize">
-          {bookAbbrev} {chapterAbbrev}
-        </h2>
 
         {errorMessage ? (
           <p>{errorMessage}</p>

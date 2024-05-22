@@ -1,79 +1,61 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Select,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-} from "./ui/Select";
+import { Select, SelectGroup, SelectItem } from "./ui/Select";
+import { useParams, useRouter } from "next/navigation";
 
 interface Chapter {
   number: string;
   id: string;
 }
 
-interface SelectChapterProps {
-  selectedBible: string | null;
-  selectedBook: string | null;
-  onChapterSelection: (value: string) => void;
-}
+const SelectChapter: React.FC = () => {
+  const router = useRouter();
+  const params = useParams();
 
-const SelectChapter: React.FC<SelectChapterProps> = ({
-  selectedBible,
-  selectedBook,
-  onChapterSelection,
-}) => {
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Get Bible ID
-
-  let bibleId = "null";
-  let bibleAbbrev = "null";
-  if (selectedBible) {
-    [bibleId, bibleAbbrev] = selectedBible.split(":");
-  }
-
-  // Get Book ID
-
-  let bookId = "null";
-  let bookAbbrev = "null";
-  if (selectedBook) {
-    [bookId, bookAbbrev] = selectedBook.split(":");
-  }
-
-  // Handle chapter selection
+  const bibleId = params?.slug?.[0] ?? null;
+  const bookId = params?.slug?.[1] ?? null;
 
   const handleSelectionChange = (value: string) => {
-    onChapterSelection(value);
+    let chapterId = "null";
+    let chapterAbbrev = "null";
+    if (value) {
+      [chapterId, chapterAbbrev] = value.split(":");
+    }
+    router.push(`/bible/${bibleId}/${bookId}/${chapterAbbrev}`);
   };
 
   useEffect(() => {
-    if (selectedBible && selectedBook) {
-      const endpoint = `/bibles/${bibleId}/books/${bookId}/chapters`;
-      const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
+    const endpoint = `/bibles/${bibleId}/books/${bookId}/chapters`;
+    const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
-      fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          setChapters(data.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          setLoading(false);
-        });
-    }
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setChapters(data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setLoading(true);
+      });
   }, [bibleId, bookId]);
 
   if (loading) {
-    return <p className="body">loadinggg</p>;
+    return (
+      <Select label="Chapter" disabled>
+        <SelectGroup>
+          <SelectItem value="disabled">disabled</SelectItem>
+        </SelectGroup>
+      </Select>
+    );
   }
 
   return (
-    <Select label="1" onValueChange={handleSelectionChange}>
+    <Select label="Chapter" onValueChange={handleSelectionChange}>
       <SelectGroup>
         {chapters && chapters.length > 0 ? (
           chapters.map((chapter) => (

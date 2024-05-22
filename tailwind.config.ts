@@ -21,7 +21,7 @@ const config: Config = {
       h3: "25px",
       h4: "19px",
       body: "15px",
-      sub: "12px",
+      sub: "12.5px",
     },
     borderRadius: {
       12: "12px",
