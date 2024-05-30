@@ -16,33 +16,31 @@ const SelectChapter: React.FC = () => {
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const bibleId = params?.slug?.[0] ?? null;
-  const bookId = params?.slug?.[1] ?? null;
+  const bible = decodeURIComponent(params?.slug?.[0] ?? "");
+  const book = decodeURIComponent(params?.slug?.[1] ?? "");
 
   const handleSelectionChange = (value: string) => {
-    let chapterId = "null";
-    let chapterAbbrev = "null";
-    if (value) {
-      [chapterId, chapterAbbrev] = value.split(":");
-    }
-    router.push(`/bible/${bibleId}/${bookId}/${chapterAbbrev}`);
+    router.push(`/bible/${bible}/${book}/${value}`);
   };
 
   useEffect(() => {
-    const endpoint = `/bibles/${bibleId}/books/${bookId}/chapters`;
-    const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
+    if (bible && book) {
+      const endpoint = `/bibles/${bible.split(":")[0]}/books/${
+        book.split(":")[0]
+      }/chapters`;
+      const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setChapters(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setLoading(true);
-      });
-  }, [bibleId, bookId]);
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          setChapters(data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, [bible, book]);
 
   if (loading) {
     return (
@@ -63,14 +61,11 @@ const SelectChapter: React.FC = () => {
               value={`${chapter.id}:${chapter.number}`}
               key={chapter.id}
             >
-              <p className="text-body capitalize">{chapter.number}</p>
+              <p className="body capitalize">{chapter.number}</p>
             </SelectItem>
           ))
         ) : (
-          <p className="text-body text-red-700">
-            Error code 89 <br /> No chapters returned from API <br /> No bibleId
-            or bookId?
-          </p>
+          <p className="body">Select a book or Bible version first.</p>
         )}
       </SelectGroup>
     </Select>

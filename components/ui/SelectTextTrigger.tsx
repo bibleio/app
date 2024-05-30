@@ -1,15 +1,15 @@
 import React, { ReactNode } from "react";
 import * as RadixSelect from "@radix-ui/react-select";
 import { IconChevronDown, IconChevronUp, IconCheck } from "@tabler/icons-react";
-import { SelectItemProps, SelectProps } from "@radix-ui/react-select";
-import classNames from "classnames";
+import { SelectProps } from "@radix-ui/react-select";
 
 interface CustomSelectProps {
   label: string;
+  triggerHtml?: ReactNode;
 }
 
 type ExtendedSelectProps = CustomSelectProps & SelectProps;
-export const Select = ({
+export const SelectTextTrigger = ({
   label,
   children,
   defaultValue,
@@ -21,6 +21,7 @@ export const Select = ({
   name,
   disabled,
   required,
+  triggerHtml,
 }: ExtendedSelectProps) => {
   return (
     <RadixSelect.Root
@@ -35,13 +36,10 @@ export const Select = ({
       required={required}
     >
       <RadixSelect.Trigger
-        className="bg-light-fg-2 border border-black shadow-component rounded-12 flex justify-between px-16 py-8 gap-12 outline-none component-hover-effect disabled:pointer-events-none radix-disabled:cursor-not-allowed radix-disabled:opacity-50"
+        className="h4 outline-none select-none hover:text-light-accent-navy component-hover-effect disabled:pointer-events-none radix-disabled:cursor-not-allowed radix-disabled:text-black/30"
         aria-label={label}
       >
-        <RadixSelect.Value placeholder={label} />
-        <RadixSelect.Icon className="radix-state-open:rotate-180">
-          <IconChevronDown />
-        </RadixSelect.Icon>
+        {triggerHtml}
       </RadixSelect.Trigger>
       <RadixSelect.Portal>
         <RadixSelect.Content
@@ -63,17 +61,13 @@ export const Select = ({
   );
 };
 
-interface ExtendedSelectItemProps extends SelectItemProps {
-  font?: string;
-}
-
-export const SelectItem = React.forwardRef<
+export const SelectItemTextTrigger = React.forwardRef<
   HTMLDivElement,
-  ExtendedSelectItemProps
->(({ children, font, ...props }, forwardedRef) => {
+  React.ComponentProps<typeof RadixSelect.Item>
+>(({ children, ...props }, forwardedRef) => {
   return (
     <RadixSelect.Item
-      className={`${font} body px-32 text-text-1 font-sans flex items-center h-fit relative select-none cursor-pointer data-[disabled]:text-text-disabled radix-disabled:pointer-events-none outline-none radix-highlighted:translate-x-4 radix-state-checked:font-semibold radix-state-checked:text-light-accent-navy duration-150 ease-out transition-[transform, font-weight]`}
+      className="body px-32 text-text-1 font-sans flex items-center h-fit relative select-none cursor-pointer data-[disabled]:text-text-disabled radix-disabled:pointer-events-none outline-none radix-highlighted:translate-x-4 radix-state-checked:font-semibold radix-state-checked:text-light-accent-navy duration-150 ease-out transition-[transform, font-weight]"
       {...props}
       ref={forwardedRef}
     >
@@ -85,7 +79,11 @@ export const SelectItem = React.forwardRef<
   );
 });
 
-export const SelectGroup = ({ children }: { children: ReactNode }) => {
+export const SelectGroupTextTrigger = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   return (
     <RadixSelect.Group className="flex flex-col gap-16">
       {children}
@@ -93,7 +91,11 @@ export const SelectGroup = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const SelectLabel = ({ children }: { children: ReactNode }) => {
+export const SelectLabelTextTrigger = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   return (
     <RadixSelect.Label className="text-sub text-black/90 px-24">
       {children}
@@ -101,6 +103,6 @@ export const SelectLabel = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const SelectSeparator = () => {
+export const SelectSeparatorTextTrigger = () => {
   return <RadixSelect.Separator className="h-[1px] w-full bg-black/50" />;
 };

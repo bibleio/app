@@ -15,33 +15,30 @@ const SelectBook: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const bibleId = params?.slug?.[0] ?? null;
-  const chapterAbbrev = params?.slug?.[2] ?? null;
+  const bible = params?.slug?.[0] ?? "";
 
   const handleSelectionChange = (value: string) => {
-    let bookId = "null";
-    let bookAbbrev = "null";
-    if (value) {
-      [bookId, bookAbbrev] = value.split(":");
-    }
-    router.push(`/bible/${bibleId}/${bookId}/1`);
+    router.push(`/bible/${bible}/${value}/${value.split(":")[0]}.1:1`);
   };
 
   useEffect(() => {
-    const endpoint = `/bibles/${bibleId}/books`;
-    const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
+    if (bible) {
+      const endpoint = `/bibles/${
+        decodeURIComponent(bible).split(":")[0]
+      }/books`;
+      const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setBooks(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching books:", error);
-        setLoading(false);
-      });
-  }, [bibleId]);
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          setBooks(data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching books:", error);
+        });
+    }
+  }, [bible]);
 
   if (loading) {
     return (
@@ -63,9 +60,7 @@ const SelectBook: React.FC = () => {
             </SelectItem>
           ))
         ) : (
-          <p className="text-body text-red-700">
-            Error code 89 <br /> No books returned from API
-          </p>
+          <p className="body">Select a Bible version first.</p>
         )}
       </SelectGroup>
     </Select>

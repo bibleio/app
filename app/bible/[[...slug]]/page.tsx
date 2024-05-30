@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState, FC } from "react";
 import SelectBible from "@/components/SelectBible";
-import SelectBook from "@/components/SelectBook";
-import SelectChapter from "@/components/SelectChapter";
 import { useTextFormattingMenuStore } from "@/components/textFormattingMenuStore";
 import TextFormattingMenu from "@/components/TextFormattingMenu";
+import { SelectBookChapter } from "@/components/SelectBookChapter";
 
 interface ChapterContent {
   id: string;
@@ -28,7 +27,7 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
   const [chapterContent, setChapterContent] = useState<ChapterContent[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [viewAreaValue, setViewAreaValue] = useState<number[]>([25]);
+  const [viewAreaValue, setViewAreaValue] = useState<number[]>([50]);
   const [lineSpacingValue, setLineSpacingValue] = useState<number[]>([75]);
   const [fontSizeValue, setFontSizeValue] = useState<number[]>([25]);
   // Text Formatting //
@@ -53,7 +52,9 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     if (params.slug && params.slug.length >= 3) {
-      const endpoint = `/bibles/${params["slug"][0]}/chapters/${params["slug"][1]}.${params["slug"][2]}`;
+      const endpoint = `/bibles/${
+        decodeURIComponent(params?.slug?.[0] ?? "").split(":")[0]
+      }/chapters/${decodeURIComponent(params?.slug?.[2] ?? "").split(":")[0]}`;
       const apiUrl = `/api/bible?endpoint=${encodeURIComponent(endpoint)}`;
 
       fetch(apiUrl)
@@ -76,11 +77,11 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
 
   // View area
   const viewAreaClasses: { [key: number]: string } = {
-    0: "px-[554px] max-[1090px]:px-256 max-[920px]:px-16",
-    25: "px-[384px] max-[920px]:px-16",
-    50: "px-[286px] max-[920px]:px-16",
-    75: "px-[192px] max-[920px]:px-16",
-    100: "px-64 max-[1320px]:px-16",
+    0: "w-[256px]",
+    25: "w-[380px]",
+    50: "w-[570px]",
+    75: "w-[660px]",
+    100: "w-[800px]  ",
   };
 
   const viewAreaClass = viewAreaClasses[viewAreaValue[0]];
@@ -108,13 +109,10 @@ const Home: FC<HomeProps> = ({ params }: { params: { slug: string } }) => {
   return (
     <>
       <div
-        className={`h-full w-full ${viewAreaClass} flex flex-col gap-24 py-64 items-start justify-center`}
+        className={`h-full ${viewAreaClass} max-[920px]:w-full max-[920px]:px-64 max-[450px]:px-12 text-justify flex flex-col gap-24 py-64 self-center`}
       >
         <div className="flex w-full justify-between gap-32 flex-wrap">
-          <div className="flex gap-12">
-            <SelectBook />
-            <SelectChapter />
-          </div>
+          <SelectBookChapter />
           <SelectBible />
         </div>
 

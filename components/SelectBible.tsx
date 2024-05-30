@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Select, SelectGroup, SelectItem, SelectLabel } from "./ui/Select";
+import {
+  SelectTextTrigger,
+  SelectGroupTextTrigger,
+  SelectItemTextTrigger,
+  SelectLabelTextTrigger,
+} from "./ui/SelectTextTrigger";
 import { useParams, useRouter } from "next/navigation";
 
 interface Bible {
@@ -28,21 +33,16 @@ const SelectBible: React.FC = () => {
     [key: string]: Bible[];
   }>({});
 
-  const bookId = params?.slug?.[1] ?? null;
-  const chapterAbbrev = params?.slug?.[2] ?? null;
+  const book = params?.slug?.[1] ?? null;
+  const chapter = params?.slug?.[2] ?? null;
 
   const handleSelectionChange = (value: string) => {
-    let bibleId = "null";
-    let bibleAbbrev = "null";
-    if (value) {
-      [bibleId, bibleAbbrev] = value.split(":");
-    }
-    if (bookId && chapterAbbrev) {
-      router.push(`/bible/${bibleId}/${bookId}/${chapterAbbrev}`);
-    } else if (bookId) {
-      router.push(`/bible/${bibleId}/${bookId}`);
+    if (book && chapter) {
+      router.push(`/bible/${value}/${book}/${chapter}`);
+    } else if (book) {
+      router.push(`/bible/${value}/${book}`);
     } else {
-      router.push(`/bible/${bibleId}`);
+      router.push(`/bible/${value}`);
     }
   };
 
@@ -80,28 +80,41 @@ const SelectBible: React.FC = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
-        setLoading(false);
       });
   }, []);
 
   if (loading) {
     return (
-      <Select label="Bible Version" disabled>
-        <SelectGroup>
-          <SelectItem value="disabled">disabled</SelectItem>
-        </SelectGroup>
-      </Select>
+      <SelectTextTrigger
+        label="Bible Version"
+        disabled
+        triggerHtml={"Bible Version"}
+      >
+        <SelectGroupTextTrigger>
+          <SelectItemTextTrigger value="disabled">
+            disabled
+          </SelectItemTextTrigger>
+        </SelectGroupTextTrigger>
+      </SelectTextTrigger>
     );
   }
 
   return (
-    <Select label="Bible Version" onValueChange={handleSelectionChange}>
+    <SelectTextTrigger
+      label="Bible Version"
+      triggerHtml={
+        params?.slug?.[0]
+          ? decodeURIComponent(params.slug[0]).split(":")[1].toUpperCase()
+          : "Bible Version"
+      }
+      onValueChange={handleSelectionChange}
+    >
       {Object.entries(languageGroups).map(([language, bibles], index) => (
         <React.Fragment key={language}>
-          <SelectGroup>
-            <SelectLabel>{language}</SelectLabel>
+          <SelectGroupTextTrigger>
+            <SelectLabelTextTrigger>{language}</SelectLabelTextTrigger>
             {bibles.map((bible) => (
-              <SelectItem
+              <SelectItemTextTrigger
                 value={`${bible.id}:${bible.abbreviation}`}
                 key={bible.id}
               >
@@ -109,12 +122,12 @@ const SelectBible: React.FC = () => {
                   <p className="body">{bible.name}</p>
                   <p className="subtext">{bible.description}</p>
                 </div>
-              </SelectItem>
+              </SelectItemTextTrigger>
             ))}
-          </SelectGroup>
+          </SelectGroupTextTrigger>
         </React.Fragment>
       ))}
-    </Select>
+    </SelectTextTrigger>
   );
 };
 
