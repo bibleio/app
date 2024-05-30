@@ -1,30 +1,44 @@
 "use client";
 
 import React from "react";
-import InfoModal from "./InfoModal";
-import { IconTypography } from "@tabler/icons-react";
-import { useTextFormattingMenuStore } from "./textFormattingMenuStore";
+import { IconTextSize, IconSearch, IconBookmarks } from "@tabler/icons-react";
+import { useTextFormattingMenuStore } from "../textFormattingMenuStore";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Nav: React.FC = () => {
   const { toggleMenu, isTextFormattingMenuOpen } = useTextFormattingMenuStore();
+  const pathname = usePathname();
   return (
-    <nav className="flex bg-fg-1 gap-32 max-w-[1250px] w-full items-center px-72 max-[580px]:px-32 max-[1250px]:rounded-t-[0px] py-20 rounded-24 border border-stroke-1 z-40 backdrop-blur-3xl">
-      <Image src={"/logomark.svg"} width={40} height={40} alt="Bibleio" />
-      <div className="h-[1px] w-full bg-black/20"></div>
-      <div className="flex gap-32 items-start">
-        <button className="flex flex-col w-fit group">
-          <p className="text-body">Bible</p>
-          <div className="w-full bg-accent h-[3px] group-hover:scale-x-75 group-active:scale-x-[.25] rounded-full duration-200 ease-out"></div>
-        </button>
-        <InfoModal />
+    <nav className="bg-light-fg-1 sticky top-0 flex justify-between items-center px-32 py-12 border border-b-black">
+      <a href="/">
+        <Image
+          src={"/brand/logo-light.svg"}
+          className="component-hover-effect"
+          alt="Bibleio"
+          height={32}
+          width={57.04}
+        />
+      </a>
+      <div className="flex gap-36 w-fit h-fit items-center">
+        <a href="/" className={pathname === "/" ? "strong-body" : "body"}>
+          Home
+        </a>
+        <a
+          href="/bible"
+          className={pathname === "/bible" ? "strong-body" : "body"}
+        >
+          Bible
+        </a>
+        <IconBookmarks />
         <button onClick={toggleMenu} className="flex flex-col w-fit group">
-          <IconTypography
+          <IconTextSize
             className={`hover:-translate-y-[1px] hover:cursor-pointer active:translate-y-4 duration-200 ease-out ${
-              isTextFormattingMenuOpen && "text-accent"
+              isTextFormattingMenuOpen && "text-light-accent-navy"
             }`}
           />
         </button>
+        <IconSearch />
       </div>
     </nav>
   );

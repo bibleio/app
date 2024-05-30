@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      "ibm-serif": ["var(--font-ibm-plex-serif)"],
+      lora: ["var(--font-lora)"],
       inter: ["var(--font-inter)"],
       quicksand: ["var(--font-quicksand)"],
       tinos: ["var(--font-tinos)"],
@@ -16,18 +16,17 @@ const config: Config = {
       "open-dyslexic": ["var(--font-open-dyslexic)"],
     },
     fontSize: {
-      "1": "32px",
-      "2": "24px",
-      "3": "18px",
-      "strong-body": "17px",
+      h1: "50px",
+      h2: "32px",
+      h3: "25px",
+      h4: "19px",
       body: "15px",
       sub: "12.5px",
     },
     borderRadius: {
-      32: "32px",
-      24: "24px",
       12: "12px",
-      8: "8px",
+      0: "0px",
+      4: "4px",
       full: "999px",
     },
     spacing: {
@@ -59,31 +58,36 @@ const config: Config = {
       256: "256px",
       512: "512px",
     },
+    boxShadow: {
+      popup: "0px 4px 49.6px rgba(0, 0, 0, 0.15)",
+      "accent-component":
+        "inset 0px 0px 5px rgba(0, 0, 0, 0.91),inset 0px 3px 4.7px rgba(255, 255, 255, 0.25),inset 0px -14px 8.3px rgba(255, 255, 255, 0.08)",
+      component:
+        "inset 0px 0px 5.6px rgba(0, 0, 0, 0.25),inset 0px -11px 6.3px rgba(255, 255, 255, 0.5),inset 0px 1px 6.3px rgba(0, 0, 0, 0.25)",
+    },
     extend: {
-      backgroundImage: {
-        "bg-white": "linear-gradient(180deg,#E3E3E3,#BBCBCE)",
-      },
       colors: {
-        "fg-1": "rgba(180,180,180,0.35)",
-        "stroke-1": "rgba(0,0,0,0.25)",
-        accent: "#0085FF",
+        "light-bg": "rgba(204, 204, 204, 1)",
+        "light-fg-1": "rgba(212, 212, 212, 1)",
+        "light-fg-2": "rgba(221, 221, 221, 1)",
+        "light-accent-navy": "#00507C",
       },
       keyframes: {
-        overlayShow: {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
         },
-        contentShow: {
-          from: { opacity: "0", transform: "translate(-50%, -48%)" },
-          to: { opacity: "1", transform: "translate(-50%, -50%)" },
+        "scale-out": {
+          from: { opacity: "1", transform: "scale(1)" },
+          to: { opacity: "0", transform: "scale(0.9)" },
         },
       },
       animation: {
-        overlayShow: "overlayShow 200ms ease-out",
-        contentShow: "contentShow 200ms ease-out",
+        "scale-in": "scale-in 150ms ease-out",
+        "scale-out": "scale-out 150ms ease-out",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-radix")()],
 };
 export default config;

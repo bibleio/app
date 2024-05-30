@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Viewport } from "next";
 
-import { IBM_Plex_Serif, Inter, Quicksand, Tinos } from "next/font/google";
+import { Lora, Inter, Quicksand, Tinos } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import localFont from "next/font/local";
 
@@ -47,10 +47,10 @@ export const metadata: Metadata = {
   },
 };
 
-const ibmPlexSerif = IBM_Plex_Serif({
+const lora = Lora({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-  variable: "--font-ibm-plex-serif",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-lora",
 });
 
 const inter = Inter({
@@ -82,10 +82,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexSerif.variable} ${inter.variable} ${quickSand.variable} ${tinos.variable} ${GeistMono.variable} ${openDyslexic.variable}`}
+      className={`${lora.variable} ${inter.variable} ${quickSand.variable} ${tinos.variable} ${GeistMono.variable} ${openDyslexic.variable}`}
     >
       <body
-        className={`bg-bg-white font-ibm-serif bg-fixed text-[#0C0C0C] text-body bg-cover overflow-x-hidden h-screen flex flex-col items-center gap-64 pb-256 py-12 max-[1250px]:py-0`}
+        className={`bg-light-bg text-body text-black font-lora overflow-x-hidden flex flex-col gap-0 p-0`}
       >
         <Nav />
         {children}
