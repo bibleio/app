@@ -3,7 +3,7 @@ export default function Home() {
     <div className="flex flex-col py-64 px-256 gap-16">
       <h1 className="h1">Bibleio</h1>
       <p className="body-paragraph">
-        Bibleio is an app focused on making The Word accessible, easy to
+        Bibleio is an app focused on making the Bible accessible, easy to
         understand, and spreading the Gospel.
       </p>
       <h3 className="h3">Beta</h3>
