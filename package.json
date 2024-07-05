@@ -25,7 +25,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss-radix": "^3.0.3",
-    "zustand": "^4.5.4"
+    "zustand": "^4.5.4",
+    "braces": "3.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
