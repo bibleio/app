@@ -11,9 +11,9 @@ Uses [scripture.api.bible](https://scripture.api.bible/)
 Clone this repo, then run:
 
 ```bash
-npm i
+pnpm install
 
-npm run dev
+pnpm dev
 ```
 
 ### API Key
