@@ -1,6 +1,6 @@
 ![Banner](https://i.imgur.com/L8Nikha.png)
 
-This is the Bibleio app monorepo. It contains code for the [web app](#web-app), [mobile app](#mobile-app), and [desktop app](#desktop-app).
+This is the Bibleio app **alpha** monorepo. It contains code for the [web app](#web-app), planned [mobile app](#mobile-app), and planned [desktop app](#desktop-app).
 
 Each project uses [Next.js](https://nextjs.org/docs/getting-started/installation) and [Bibleio Design](https://github.com/bibleio/design) for the frontend, and mobile/desktop apps use [Tauri v2](https://v2.tauri.app/start/).
 
