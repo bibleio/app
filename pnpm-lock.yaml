@@ -20,9 +20,6 @@ importers:
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.0(eslint@9.9.0(jiti@1.21.6))
-      git-format-staged:
-        specifier: ^3.1.1
-        version: 3.1.1
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -1099,10 +1096,6 @@ packages:
   get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
     engines: {node: '>=6'}
-
-  git-format-staged@3.1.1:
-    resolution: {integrity: sha512-P749fkktaiAchFZKR7bgdvruzhvbcIDr1uRBrS9/Wdimb7wH1Twchz9gOixj8tUaHVMuXY/ckDojfOwV6AxgPA==}
-    hasBin: true
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -2943,8 +2936,6 @@ snapshots:
       next: 14.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   get-nonce@1.0.1: {}
-
-  git-format-staged@3.1.1: {}
 
   glob-parent@5.1.2:
     dependencies:
