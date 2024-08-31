@@ -1,34 +1,34 @@
-![Banner](https://i.imgur.com/L8Nikha.png)
+# Bibleio Web App
 
-This is the Bibleio app **alpha** monorepo. It contains code for the [web app](#web-app), planned [mobile app](#mobile-app), and planned [desktop app](#desktop-app).
+Bibleio is a minimalist, simple Bible viewing app.
 
-Each project uses [Next.js](https://nextjs.org/docs/getting-started/installation) and [Bibleio Design](https://github.com/bibleio/design) for the frontend, and mobile/desktop apps use [Tauri v2](https://v2.tauri.app/start/).
+This is the old, release version! Checkout our new rewritten version (in alpha) in the `next` branch.
 
-This monorepo uses [pnpm](https://pnpm.io/installation#using-corepack) and [Turborepo](https://turbo.build/repo/docs).
+Uses [scripture.api.bible](https://scripture.api.bible/)
 
-Our designs are open source too! Check them out on [Figma](https://www.figma.com/community/file/1408514554388853422/bibleio-apps-websites), the file includes designs for our planned, unfinished features too.
+[View to do list on notion](https://dukc.notion.site/Biblio-781f29eb2433420d8dbd98feaa584237)
 
-# Web App
+## Dev Server
 
-![Web app banner](https://i.imgur.com/R1HNhih.png)
+Clone this repo, then run:
 
-The Bibleio web app is a simple, casual reading experience with basic text, theme, and saving features.
+```bash
+pnpm install
 
-# Mobile App (Planned, Not Started)
+pnpm dev
+```
 
-![Mobile app banner](https://i.imgur.com/8hmzqOS.png)
+### API Key
 
-The mobile app is a simple study experience designed for your phone, with enhanced study tools, and the ability to store your saves locally, instead an of an account.
+You will need your own API key to use scripture.api.bible. Create your own app [here](https://scripture.api.bible/signup), then copy your key. Then create a `.env` file inside the root, and put inside:
 
-# Desktop App (Planned, Not Started)
+```env
+API_KEY="YOUR_API_KEY_HERE"
+```
 
-![Desktop app banner](https://i.imgur.com/Oh0VzGC.png)
+Replace `YOUR_API_KEY_HERE` with your actual API key. Then you should be good to go!
 
-The desktop app is a full study experience, with split views, original language viewing (Hebrew & Greek), focus modes, and ability to store your data locally.
-
-# Contributing & License
-
-Feel free to contribute! To see how to contribute and how a specific project works, go to their specific directory's README. Always follow the [Code of Conduct](CODE_OF_CONDUCT.md), so just love your neighbor as your self.
+### License
 
 All of Bibleio's projects are licensed under the [MIT No Attribution](LICENSE.txt) license. You can copy, translate, modify, and distribute this resource, without restriction, and without needing to ask permission. Why? For the sake of the gospel (Matt 10:8).
 

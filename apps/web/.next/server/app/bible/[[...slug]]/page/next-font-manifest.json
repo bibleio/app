@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/apps/web/app/bible/[[...slug]]/page": [
+      "static/media/0QIhMX1D_JOuMw_LIftLtfOm8w-s.p.a6340243.woff2",
+      "static/media/0QIvMX1D_JOuMwr7I_FMl_E-s.p.457a0745.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}
