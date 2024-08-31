@@ -3,26 +3,30 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "web:dev": "turbo run dev --filter=@bibleio/web-app",
-    "web:build": "turbo run build --filter=@bibleio/web-app",
+    "web:dev": "turbo run dev --filter=@bibleio/web",
+    "web:build": "turbo run build --filter=@bibleio/web",
     "lint": "turbo run eslint . "
   },
   "packageManager": "pnpm@8.7.1",
   "author": "dukc",
-  "license": "GPL-3.0",
+  "license": "MIT",
+  "dependencies": {
+    "@bibleio/design": "^1.2.0",
+    "next": "^14.2.7"
+  },
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
+    "@eslint/js": "^9.9.1",
     "@types/eslint__js": "^8.42.3",
-    "eslint": "^9.9.0",
+    "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-rust": "^0.1.9",
     "prettier-plugin-tailwindcss": "^0.6.6",
-    "turbo": "^2.0.14",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^8.2.0"
+    "turbo": "^2.1.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.3.0"
   },
   "prettier": {
     "plugins": [

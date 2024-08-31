@@ -30,4 +30,8 @@ The desktop app is a full study experience, with split views, original language 
 
 Feel free to contribute! To see how to contribute and how a specific project works, go to their specific directory's README. Always follow the [Code of Conduct](CODE_OF_CONDUCT.md), so just love your neighbor as your self.
 
-All of Bibleio's projects are licensed under `GPL-3.0`. You can use this code for what ever you want, but you must publish your clone/fork with the same open-source license.
+All of Bibleio's projects are licensed under the [MIT No Attribution](LICENSE.txt) license. You can copy, translate, modify, and distribute this resource, without restriction, and without needing to ask permission. Why? For the sake of the gospel (Matt 10:8).
+
+Please consider publishing all of your Bible resources under the same license. Check out why [here](https://copy.church/explain/importance/).
+
+![license badge - Freely given, no conditions!](https://copy.church/badges/lcc_alt_pde.png)

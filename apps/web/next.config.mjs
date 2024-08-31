@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async redirects() {
+  /* async redirects() {
     return [
       {
-        source: "/",
-        destination: "/bible",
+        source: '/',
+        destination: '/bible',
         permanent: true,
       },
     ];
-  },
+    }, */
 };
 
 export default nextConfig;
