@@ -11,22 +11,22 @@
   "author": "dukc",
   "license": "MIT",
   "dependencies": {
-    "@bibleio/design": "^1.2.0",
-    "next": "^14.2.7"
+    "@bibleio/design": "^2.2.1",
+    "next": "^14.2.13"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.1",
+    "@eslint/js": "^9.11.1",
     "@types/eslint__js": "^8.42.3",
-    "eslint": "^9.9.1",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-rust": "^0.1.9",
-    "prettier-plugin-tailwindcss": "^0.6.6",
-    "turbo": "^2.1.0",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.3.0"
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "turbo": "^2.1.2",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.7.0"
   },
   "prettier": {
     "plugins": [
